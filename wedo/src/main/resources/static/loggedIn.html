@@ -1,0 +1,14 @@
+<div ng-controller="LawwaController">
+    <h1>Welcome {{logInObj.employee.firstname}}</h1>
+
+    <div class="d-flex p-2 justify-content-center mb-5">
+        <a type="button" class="btn btn-info mr-2" href="/employees">View Employees</a>
+        <a type="button" class="btn btn-info mr-2" href="/login">Login Page</a>
+        <a type="button" class="btn btn-info mr-2" href="/registry">View Registry</a>
+        <!-- <a type="button" class="btn btn-info mr-2" href="/loggedIn">logged in</a> -->
+    </div>       
+
+    <p>
+        <input type="submit" class="btn btn-danger float-right" value="Log Out" ng-click="logout()">
+    </p>
+</div>

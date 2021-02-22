@@ -1,0 +1,39 @@
+<div class="d-flex p-2 justify-content-center mb-5">
+  <a type="button" class="btn btn-info mr-2" href="/employees">View Employees</a>
+  <a type="button" class="btn btn-info mr-2" href="/login">Login Page</a>
+  <a type="button" class="btn btn-info mr-2" href="/registry">View Registry</a>
+  <a type="button" class="btn btn-info mr-2" href="/loggedIn">logged in</a>
+</div>     
+
+<div class="container">
+  <h2>Registry Data</h2>
+  <div class="clearfix"></div>
+  <!-- <div class="alert alert-info alert-dismissible" role="alert" ng-if="info">
+    <button type="button" class="close" aria-label="Close">
+      <span aria-hidden="true" ng-click="clearInfo()">&times;</span>
+    </button>
+    {{info}}
+  </div> -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Index</th>
+        <th>Employee ID</th>
+        <th>Location</th>
+        <th>Remote Login</th>
+        <th>Sign In</th>
+        <th>Sign Out</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="registry in registryList">
+        <td>{{registry.registryId}}</td>
+        <td>{{registry.employeeId}}</td>
+        <td>{{registry.location}}</td>
+        <td>{{true == registry.isRemote ? 'Yes' : 'No'}}</td>
+        <td>{{registry.signIn}}</td>
+        <td>{{registry.signOut}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

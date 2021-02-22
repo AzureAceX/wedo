@@ -1,0 +1,205 @@
+$melon: #F97D75 ;
+$black: #2E3641 ;
+
+* {
+	font-size: 14px;
+	font-family: 'Titillium Web', sans-serif;
+	color: $black;
+}
+
+h1 {
+	font-size: 32px;
+}
+
+input {
+	border: 0;
+	margin-right: 5px;
+	background: transparent;
+	border-bottom: 1px solid black;
+	width: 150px;
+	padding: 8px; @include transition(all .3s ease); 
+	&:focus, 
+	&:active
+	{
+    outline : 0;
+	width: 200px;
+	border-bottom-color: $melon;
+	}
+
+}
+button {
+	background-color: $melon;
+	border: 0;
+	padding: 8px 15px;
+	color: black;
+	text-transform: uppercase;
+	cursor: pointer;
+	&:focus,
+	&:active
+	{
+		outline: 0;
+	}
+
+}
+ul {
+	list-style: none;
+	padding-left: 0;
+	margin-top: 25px;
+}
+
+li {
+	border: 1px solid black;
+	display: inline-block;
+	padding: 5px 10px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	text-transform: capitalize;
+}
+
+.fa-close {
+	cursor: pointer;
+	position: absolute;
+	top: 5px;
+	right: 22px;
+	float: right;
+}
+
+[contenteditable] { &:focus , &:active {
+    outline :0;
+
+}
+
+}
+// .recipe_content {
+// 	font-family: georgia, garamond, serif;
+// 	font-size: 18px;
+// 	font-style: italic;
+// }
+
+// .recipe_content2 {
+// 	font-family: georgia, garamond, serif;
+// 	font-size: 12px;
+// 	font-style: italic;
+// }
+
+// .recipe_btn {
+// 	font-family: georgia, garamond, serif;
+// 	font-size: 14px;
+// 	font-style: italic;
+// 	background: rgba(0, 128, 128, 0.7);
+// 	box-shadow: rgba(0, 128, 128, 0.3);
+// }
+
+.mainHeader {
+	font-family: georgia, garamond, serif;
+	font-size: 40px;
+	font-style: italic;
+	text-align: center;
+}
+
+// .recipe_header2 {
+// 	font-family: georgia, garamond, serif;
+// 	font-size: 25px;
+// 	font-style: italic;
+// 	text-align: center;
+// }
+
+// .recipe_header3 {
+// 	font-family: georgia, garamond, serif;
+// 	font-size: 18px;
+// 	font-style: italic;
+// 	text-align: center;
+// }
+
+.jumbotron {
+	background-size: cover;
+	background: rgba(255, 249, 249, 0.3);
+	box-shadow: rgba(253, 253, 253, 0.3)
+}
+
+body {
+	background-color: #f7f7f7;
+	font-family: "Roboto", helvetica, arial, sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	text-rendering: optimizeLegibility;
+}
+
+div.table-title {
+	display: block;
+	margin: auto;
+	max-width: 600px;
+	padding: 5px;
+	width: 100%;
+}
+
+.table-title h3 {
+	color: #fafafa;
+	font-size: 30px;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "Roboto", helvetica, arial, sans-serif;
+	text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+	text-transform: uppercase;
+}
+
+/*** Table Styles **/
+.table-fill {
+	background: light-grey;
+	border-radius: 3px;
+	border-collapse: collapse;
+	height: 300px;
+	margin: auto;
+	max-width: 550px;
+	padding: 5px;
+	width: 100%;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+	animation: float 5s infinite;
+}
+
+#t-head {
+	color: #D5DDE5;;
+	background: #1b1e24;
+	border-bottom: 4px solid #9ea7af;
+	border-right: 1px solid #343a45;
+	font-size: 20px;
+	font-weight: 100;
+	padding: 10px;
+	text-align: left;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+	vertical-align: middle;
+}
+
+#t-row {
+	border-top: 1px solid #C1C3D1;
+	border-bottom-: 1px solid #C1C3D1;
+	color: #666B85;
+	font-size: 14px;
+	font-weight: normal;
+}
+
+#t-col {
+	background: #FFFFFF;
+	padding: 15px;
+	text-align: left;
+	vertical-align: middle;
+	font-weight: 300;
+	font-size: 14px;
+	border-right: 1px solid #C1C3D1;
+}
+
+#t-row:nth-child(odd) #t-col {
+	background: #EBEBEB;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-right {
+	text-align: right;
+}
