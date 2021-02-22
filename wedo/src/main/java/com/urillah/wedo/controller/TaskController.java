@@ -15,16 +15,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.urillah.empireproj.dto.AccountDTO;
-import com.urillah.empireproj.model.Account;
-import com.urillah.empireproj.repository.AccountRepository;
+import com.urillah.wedo.model.Task;
+import com.urillah.wedo.repository.TaskRepository;
 
 @RestController
-@RequestMapping("/accounts")
-class AccountController {
+@RequestMapping("/tasks")
+class TaskController {
 
 	@Autowired
-	private AccountRepository accountRepositoryObj;
+	private TaskRepository taskRepositoryObj;
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -33,10 +32,10 @@ class AccountController {
 //    AccountDetailsRepository accountDetailsRepositoryObj;
 
 	@GetMapping(value = "/list")
-	public List<Account> getAll() {
-		List<Account> accounts = new ArrayList<>();
-		accountRepositoryObj.findAll().forEach(accounts::add);
-		return accounts;
+	public List<Task> getAll() {
+		List<Task> tasks = new ArrayList<>();
+		taskRepositoryObj.findAll().forEach(tasks::add);
+		return tasks;
 	}
 
 //	@GetMapping(value = "/{accountId}")
@@ -44,19 +43,19 @@ class AccountController {
 //		return accountRepositoryObj.findOne(accountId);
 //	}
 
-	@PostMapping(value = "/create")
-	public ResponseEntity<Account> create(@RequestBody AccountDTO accountDto) {
-		try {
-			Account accountObj = modelMapper.map(accountDto, Account.class);
-			accountRepositoryObj.save(accountObj);
-
-//             accountProfileRepositoryObj.set
-
-			return new ResponseEntity<>(accountObj, HttpStatus.CREATED);
-		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
-		}
-	}
+//	@PostMapping(value = "/create")
+//	public ResponseEntity<Task> create(@RequestBody Task accountDto) {
+//		try {
+//			Task accountObj = modelMapper.map(accountDto, Task.class);
+//			accountRepositoryObj.save(accountObj);
+//
+////             accountProfileRepositoryObj.set
+//
+//			return new ResponseEntity<>(accountObj, HttpStatus.CREATED);
+//		} catch (Exception e) {
+//			return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+//		}
+//	}
 
 //	@DeleteMapping(value = "/{accountId}")
 //	public ResponseEntity<HttpStatus> delete(@PathVariable("accountId") Long accountId) {
@@ -72,8 +71,8 @@ class AccountController {
 	 * Account Login
 	 */
 
-	@GetMapping(value = "/{username}")
-	public Account findByUsername(@PathVariable("username") String username) {
-		return accountRepositoryObj.findByUsername(username);
-	}
+//	@GetMapping(value = "/{username}")
+//	public Task findByUsername(@PathVariable("username") String username) {
+//		return accountRepositoryObj.findByUsername(username);
+//	}
 }
