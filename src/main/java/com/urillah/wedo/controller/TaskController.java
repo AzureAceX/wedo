@@ -44,19 +44,16 @@ class TaskController {
 //		return accountRepositoryObj.findOne(accountId);
 //	}
 
-//	@PostMapping(value = "/create")
-//	public ResponseEntity<Task> create(@RequestBody Task accountDto) {
-//		try {
-//			Task accountObj = modelMapper.map(accountDto, Task.class);
-//			accountRepositoryObj.save(accountObj);
-//
-////             accountProfileRepositoryObj.set
-//
-//			return new ResponseEntity<>(accountObj, HttpStatus.CREATED);
-//		} catch (Exception e) {
-//			return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
-//		}
-//	}
+	@PostMapping(value = "/create")
+	public ResponseEntity<Task> create(@RequestBody Task taskDto) {
+		try {
+			Task taskObj = modelMapper.map(taskDto, Task.class);
+			taskRepositoryObj.save(taskObj);
+			return new ResponseEntity<>(taskObj, HttpStatus.CREATED);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+		}
+	}
 
 //	@DeleteMapping(value = "/{accountId}")
 //	public ResponseEntity<HttpStatus> delete(@PathVariable("accountId") Long accountId) {

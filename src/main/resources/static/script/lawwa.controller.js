@@ -1,31 +1,15 @@
 app.controller(
-  "LawwaController",
-  function ($scope, LawwaService, $location, $window) {
-    //Details to be filled for user to log in
-    $scope.username;
-    $scope.password;
-    $scope.loggedIn = false;
-    $scope.isRemote = false;
-    $scope.location = "UNKNOWN"; // Until i add location library in backend
+  "WedoController",
+  function ($scope, WedoSerivce, $location, $window) {
 
-    //Employee registration
-    $scope.newEmp = {};
+    //Create task
+    $scope.newTask = {};
 
-    //Details to be filled on log in
-    $scope.logInObj = {};
-    $scope.logInObj.employee = {};
-    $scope.logInObj.registry = {};
-    $scope.logInObj.employee.firstName;
-
-    $scope.sessionInfo = {};
-    $scope.sessionInfo.employeeId;
-
-    //List Registry for registry view page - runs on app load
-    LawwaService.listTasks(function (err, data) {
+    //List tasks - runs on app load
+    WedoSerivce.listTasks(function (err, data) {
       if (!err) {
         $scope.taskList = data;
       }
-      //reconvert time back to simpler formats
     });
 
     //List Employees for employee view page - runs on app load
@@ -34,7 +18,6 @@ app.controller(
     //     $scope.employeesList = data;
     //   }
     // });
-
 
     // Log in functionality
     // $scope.login = function () {
@@ -94,14 +77,14 @@ app.controller(
     //   LawwaService.updateRegistry(function (err, data) {}, $scope.empRegistry);
     // };
 
-    // $scope.createEmployee = function () {
-    //   LawwaService.createEmployee($scope.newEmp, function (err, data) {
-    //     if (!err) {
-    //       console.log($scope.newEmp);
-    //     }
-    //   });
-    //   $scope.closeModal();
-    // };
+    $scope.createTask = function () {
+      WedoSerivce.createTask($scope.newTask, function (err, data) {
+        if (!err) {
+          console.log($scope.newTask);
+        }
+      });
+      $scope.closeModal();
+    };
 
     //   $scope.updateEmployee = function() {
     //     LawwaService.updateEmployee(function (err, data){
@@ -130,12 +113,10 @@ app.controller(
     //   return res;
     // }
 
-    $scope.resetRegistryObj = function () {
-      $scope.logInObj.registry = {};
-    };
+
 
     $scope.closeModal = function () {
-      $scope.newEmp = {};
+      $scope.newTask = {};
     };
 
     // $scope.navToLoggedIn = function () {

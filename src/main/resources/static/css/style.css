@@ -88,20 +88,22 @@ li {
 // } */
 
 .mainHeader {
-	font-family: georgia, garamond, serif;
+	font-family: cursive;	
 	font-size: 40px;
 	font-style: italic;
+	font-weight: bolder;
 	text-align: center;
 }
 
-/* // .recipe_header2 {
-// 	font-family: georgia, garamond, serif;
-// 	font-size: 25px;
-// 	font-style: italic;
-// 	text-align: center;
-// }
 
-// .recipe_header3 {
+.secondaryheader {
+ 	font-family: georgia, garamond, serif;
+ 	font-size: 25px;
+ 	/* font-style: italic; */
+ 	text-align: center;
+ }
+
+/* // .recipe_header3 {
 // 	font-family: georgia, garamond, serif;
 // 	font-size: 18px;
 // 	font-style: italic;
