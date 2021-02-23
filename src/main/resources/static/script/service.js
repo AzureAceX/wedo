@@ -91,7 +91,7 @@ angular.module("myApp").factory("LawwaService", function ($http) {
 
 
   return {
-    listRegistry: listRegistry,
+    listTasks: listTasks,
     addRegistry: addRegistry,
     updateRegistry: updateRegistry,
 
