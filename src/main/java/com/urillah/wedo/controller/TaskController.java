@@ -35,6 +35,7 @@ class TaskController {
 	public List<Task> getAll() {
 		List<Task> tasks = new ArrayList<>();
 		taskRepositoryObj.findAll().forEach(tasks::add);
+		System.out.println("we here");
 		return tasks;
 	}
 

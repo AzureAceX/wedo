@@ -3,11 +3,11 @@ angular.module("myApp").factory("LawwaService", function ($http) {
 	/*
 		Registry Operations
 	*/
-  var listRegistry = function (cb) {
+  var listTasks = function (cb) {
     $http({
       method: "GET",
       // url: "http://localhost:8761/registry/list",
-      url: "https://azureace-wedo.herokuapp.com/registry/list",
+      url: "https://azureace-wedo.herokuapp.com/tasks/list",
     })
       .success(function (data, status, headers, config) {
         cb(null, data);
