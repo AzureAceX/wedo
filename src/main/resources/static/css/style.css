@@ -1,10 +1,7 @@
-$melon: #F97D75 ;
-$black: #2E3641 ;
-
 * {
 	font-size: 14px;
 	font-family: 'Titillium Web', sans-serif;
-	color: $black;
+	color: #2E3641;
 }
 
 h1 {
@@ -17,30 +14,30 @@ input {
 	background: transparent;
 	border-bottom: 1px solid black;
 	width: 150px;
-	padding: 8px; @include transition(all .3s ease); 
-	&:focus, 
-	&:active
-	{
-    outline : 0;
-	width: 200px;
-	border-bottom-color: $melon;
-	}
-
+	padding: 8px; 
+	transition: all .3s ease; 
 }
+
+input:active, input:focus
+{
+outline : 0;
+width: 200px;
+border-bottom-color: #F97D75;
+}
+
 button {
-	background-color: $melon;
+	background-color: #F97D75;
 	border: 0;
 	padding: 8px 15px;
 	color: black;
 	text-transform: uppercase;
 	cursor: pointer;
-	&:focus,
-	&:active
-	{
-		outline: 0;
-	}
-
 }
+
+button:focus, button:active{
+	outline: 0;
+}
+
 ul {
 	list-style: none;
 	padding-left: 0;
@@ -64,19 +61,19 @@ li {
 	float: right;
 }
 
-[contenteditable] { &:focus , &:active {
+/* [contenteditable] { &:focus , &:active {
     outline :0;
 
-}
+} */
 
-}
-// .recipe_content {
+/* } */
+/* // .recipe_content {
 // 	font-family: georgia, garamond, serif;
 // 	font-size: 18px;
 // 	font-style: italic;
-// }
+// } */
 
-// .recipe_content2 {
+/* // .recipe_content2 {
 // 	font-family: georgia, garamond, serif;
 // 	font-size: 12px;
 // 	font-style: italic;
@@ -88,7 +85,7 @@ li {
 // 	font-style: italic;
 // 	background: rgba(0, 128, 128, 0.7);
 // 	box-shadow: rgba(0, 128, 128, 0.3);
-// }
+// } */
 
 .mainHeader {
 	font-family: georgia, garamond, serif;
@@ -97,7 +94,7 @@ li {
 	text-align: center;
 }
 
-// .recipe_header2 {
+/* // .recipe_header2 {
 // 	font-family: georgia, garamond, serif;
 // 	font-size: 25px;
 // 	font-style: italic;
@@ -109,7 +106,7 @@ li {
 // 	font-size: 18px;
 // 	font-style: italic;
 // 	text-align: center;
-// }
+// } */
 
 .jumbotron {
 	background-size: cover;
@@ -172,7 +169,7 @@ div.table-title {
 
 #t-row {
 	border-top: 1px solid #C1C3D1;
-	border-bottom-: 1px solid #C1C3D1;
+	border-bottom: 1px solid #C1C3D1;
 	color: #666B85;
 	font-size: 14px;
 	font-weight: normal;
