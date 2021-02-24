@@ -95,20 +95,12 @@ li {
 	text-align: center;
 }
 
-
 .secondaryheader {
  	font-family: georgia, garamond, serif;
  	font-size: 25px;
  	/* font-style: italic; */
  	text-align: center;
  }
-
-/* // .recipe_header3 {
-// 	font-family: georgia, garamond, serif;
-// 	font-size: 18px;
-// 	font-style: italic;
-// 	text-align: center;
-// } */
 
 .jumbotron {
 	background-size: cover;

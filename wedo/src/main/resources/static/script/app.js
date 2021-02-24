@@ -2,9 +2,9 @@ var app = angular.module("myApp", ['ngRoute']);
 
 app.config(function ($routeProvider, $locationProvider) {
     
-  if(window.history && window.history.pushState){
-    $locationProvider.html5Mode(true);
-  }
+  // if(window.history && window.history.pushState){
+  //   $locationProvider.html5Mode(true);
+  // }
   
   $routeProvider
     .when("/", {
