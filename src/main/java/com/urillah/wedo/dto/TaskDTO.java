@@ -2,13 +2,13 @@ package com.urillah.wedo.dto;
 
 import lombok.Data;
 
-@Data public class Task {
+@Data public class TaskDTO {
 
     private Integer taskid;
     private String teamid;
     private String name;
     private String description;
-    private String parenttask;
+    private Integer parenttask;
     private Integer priority;
     private String attachment;
     private Integer status;

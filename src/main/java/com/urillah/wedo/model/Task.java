@@ -21,7 +21,7 @@ import lombok.Data;
     
     private String description;
     
-    private String parenttask;
+    private Integer parenttask;
     
     private Integer priority;
 
