@@ -122,7 +122,7 @@ app.controller(
     };
 
     //On page load
-    listTasks();
+    $scope.listTasks();
 
   }
 );
