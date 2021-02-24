@@ -3,48 +3,46 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Lawwa Attendance</title>
+        <title>We Do | Task Management</title>
         
     
     <script src="vendor/angularJS/angularJS.min.js"></script>
-
     <script src="vendor/angular-route/angular-route.min.js"></script>
-
     <script src="vendor/jQuery/jquery-3.3.1.min.js"></script>
-
     <script src="vendor/popperjs/popperv1.112.5.min.js"></script>
+    <!-- <script src="https://unpkg.com/@popperjs/core@2"></script> -->
     
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
     <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/style.scss">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
     <script src="script/app.js"></script>
     <script src="script/service.js"></script>
-    <script src="script/lawwa.controller.js"></script>
+    <script src="script/wedo.controller.js"></script>
     
     </head>
 
     <body>
-    <div ng-app="myApp" ng-controller="LawwaController" >
+    <div ng-app="myApp" ng-controller="WedoController" >
+        <!-- ng-init="listTasks()" -->
                 <div class="container">
                     <div id="row1" class="row">
-                        <div class="col">
+                        <div class="col-6 col-lg-6 col-md-6 col-sm-6">
                             <div class="jumbotron jumbotron-fluid">
-                                <h1 class="mainHeader">Lawwa Employee Attendance</h1>
-                                
+                                <h1 class="mainHeader">We Do</h1>
+                                <h3 class="secondaryheader">Team Driven Task Management System</h3>
                             </div>
                         </div>
                     </div>
                     <hr width="75%">
                 </div>
 
-            <!-- <div class="d-flex p-2 justify-content-center mb-5">
-                <a type="button" class="btn btn-info mr-2" href="/employees">View Employees</a>
-                <a type="button" class="btn btn-info mr-2" href="/login">Login Page</a>
-                <a type="button" class="btn btn-info mr-2" href="/registry">View Registry</a>
-                <a type="button" class="btn btn-info mr-2" href="/loggedIn">logged in</a>
-            </div>  -->
+            <div class="d-flex p-2 justify-content-center mb-5">
+                <!-- <a type="button" class="btn btn-info mr-2" href="/employees">View Employees</a> -->
+                <a type="button" class="btn btn-info mr-2" href="/tasks">Tasks</a>
+                <!-- <a type="button" class="btn btn-info mr-2" href="/registry">View Registry</a>
+                <a type="button" class="btn btn-info mr-2" href="/loggedIn">logged in</a> -->
+            </div> 
 
             <div class="container mt-5">
                 <div ng-view></div>

@@ -13,8 +13,8 @@ app.config(function ($routeProvider, $locationProvider) {
     .when("/loggedIn", {
         templateUrl: "loggedIn.html",
       })
-    .when("/tasks", {
-      templateUrl: "tasks.html",
+    .when("/employees", {
+      templateUrl: "admin.employee.html",
     })
     .when("/registry", {
       templateUrl: "admin.registry.html",

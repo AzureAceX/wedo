@@ -1,9 +1,9 @@
-<div class="container">
-	<div class="d-flex p-2 justify-content-center mb-5">
-        <a type="button" class="btn btn-info mr-2" href="/employees">View Employees</a>
-        <a type="button" class="btn btn-info mr-2" href="/login">Login Page</a>
-        <a type="button" class="btn btn-info mr-2" href="/registry">View Registry</a>
-        <a type="button" class="btn btn-info mr-2" href="/loggedIn">logged in</a>
+<div ng-controller="WedoController" class="container">
+	<div class="col-8 col-sm-8 col-md-8 d-flex p-2 justify-content-center mb-5">
+        <a type="button" class="btn btn-info mr-2" href="/tasks">View Tasks</a>
+        <!-- <a type="button" class="btn btn-info mr-2" href="/login">Login Page</a> -->
+        <!-- <a type="button" class="btn btn-info mr-2" href="/registry">View Registry</a>
+        <a type="button" class="btn btn-info mr-2" href="/loggedIn">logged in</a> -->
 	</div>     
 	
   <button
@@ -12,25 +12,30 @@
     data-toggle="modal"
     data-target="#myModal"
   >
-    Register
+    New Task
   </button>
-  <h2>All Employees</h2>
+  <h2>All Tasks</h2>
   
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Index</th>
+        <th>Task ID</th>
         <th>Name</th>
-        <th>email</th>
-        <th>Job Role</th>
+        <th>Description</th>
+        <th>Parent Task</th>
+        <th>Status</th>
+        <th>Priority</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="employee in employeesList">
-        <td>{{employee.employeeId}}</td>
-        <td>{{employee.firstName }} {{employee.lastName}}</td>
-        <td>{{employee.email}}</td>
-        <td>{{employee.role}}</td>
+      <tr ng-repeat="task in taskList">
+        <td>{{task.taskid}}</td>
+        <td>{{task.name}}</td>
+        <td>{{task.desecription}}</td>
+        <td>{{task.parenttask}}</td>
+        <td>{{task.employeeId}}</td>
+        <td>{{task.employeeId}}</td>
+
       </tr>
     </tbody>
   </table>
@@ -43,7 +48,7 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">New Employee Registration</h4>
+        <h4 class="modal-title">Create A New Task</h4>
         <button type="button" class="close" data-dismiss="modal">
           &times;
         </button>
@@ -52,118 +57,84 @@
         <form class="form-horizontal">
           <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label"
-              >Firstname</label
+              >Task Name</label
             >
             <div class="col-sm-10">
               <input
                 type="text"
                 class="form-control"
                 id="inputEmail3"
-                placeholder="First Name"
-                ng-model="newEmp.firstName"
+                placeholder="Task Name"
+                ng-model="newTask.name"
               />
             </div>
           </div>
 
           <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label"
-              >Lastname</label
+              >Description</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="textarea"
+                class="form-control"
+                id="inputEmail3"
+                placeholder="Description"
+                ng-model="newTask.description"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label"
+              >Parent Task (Optional)</label
+            >
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputEmail3" placeholder="Parent Task" ng-model="newTask.parenttask"/>
+              <option ng-selected="data.unit == item.id" ng-repeat="item in units" ng-value="item.id">{{item.label}}</option>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label"
+              >Priority Level</label
             >
             <div class="col-sm-10">
               <input
                 type="text"
                 class="form-control"
                 id="inputEmail3"
-                placeholder="Last Name"
-                ng-model="newEmp.lastName"
+                placeholder="Priority"
+                ng-model="newTask.priority"
               />
             </div>
           </div>
 
           <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label"
-              >Username</label
+              >Attachments (Optional)</label
             >
             <div class="col-sm-10">
-              <input
-                type="text"
-                class="form-control"
-                id="inputEmail3"
-                placeholder="Username"
-                ng-model="newEmp.username"
-              />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label"
-              >Password</label
-            >
-            <div class="col-sm-10">
-              <input
-                type="text"
-                class="form-control"
-                id="inputEmail3"
-                placeholder="Password"
-                ng-model="newEmp.password"
-              />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label"
-              >Email</label
-            >
-            <div class="col-sm-10">
-              <input
-                type="text"
+              <input disabled
+                type="textarea"
                 class="form-control"
                 id="inputEmail3"
                 placeholder="Email Address"
-                ng-model="newEmp.email"
+                ng-model="newwTask.attachment"
               />
             </div>
           </div>
 
           <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label"
-              >PhoneNumber</label
-            >
-            <div class="col-sm-10">
-              <input
-                type="text"
-                class="form-control"
-                id="inputEmail3"
-                placeholder="Mobile Phone Number"
-                ng-model="newEmp.phoneNo"
-              />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label"
-              >Department</label
-            >
-            <div class="col-sm-10">
-              <input
-                type="text"
-                class="form-control"
-                id="inputEmail3"
-                placeholder="Department"
-                ng-model="newEmp.department"
-              />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label"
-              >isAdmin</label>
+              >Team ID (optional)</label>
             <div class="col-sm-2">
               <input
-                type="checkbox"
+                type="text"
                 class="form-control"
                 id="inputEmail3"
-                ng-model="newEmp.isAdmin"
+                placeholder="Team ID"
+                ng-model="newTask.teamid"
               />
             </div>
           </div>
@@ -174,7 +145,7 @@
                 type="button"
                 class="btn btn-default"
                 data-dismiss="modal"
-                ng-click="createEmployee();"
+                ng-click="createTask();"
               >
                 Save
               </button>
