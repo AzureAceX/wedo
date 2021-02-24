@@ -5,12 +5,14 @@ app.controller(
     //Create task
     $scope.newTask = {};
 
-    //List tasks - runs on app load
-    WedoSerivce.listTasks(function (err, data) {
-      if (!err) {
-        $scope.taskList = data;
-      }
-    });
+    //List tasks - to run on app load
+    $scope.listTasks = function () {
+      WedoSerivce.listTasks(function (err, data) {
+        if (!err) {
+          $scope.taskList = data;
+        }
+      });
+    };
 
     //List Employees for employee view page - runs on app load
     // LawwaService.listEmployees(function (err, data) {
@@ -119,9 +121,8 @@ app.controller(
       $scope.newTask = {};
     };
 
-    // $scope.navToLoggedIn = function () {
-      
-    // }
+    //On page load
+    listTasks();
 
   }
 );
