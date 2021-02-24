@@ -19,7 +19,7 @@ public class WeDoService {
 	//check if a child exist for given task
 	public Boolean hasChild(Integer taskId) {
 		Boolean hasChild = false;
-		if (!taskRepoObj.findByParentTask(taskId).isEmpty()) {
+		if (!taskRepoObj.findByParenttask(taskId).isEmpty()) {
 			hasChild = true;
 		}
 		return hasChild;
@@ -29,8 +29,8 @@ public class WeDoService {
 	public List<Task> getChilds(Integer taskId) {
 		List<Task> childrenTasks = new ArrayList<>();
 
-		if (!taskRepoObj.findByParentTask(taskId).isEmpty()) {
-			childrenTasks = taskRepoObj.findByParentTask(taskId);
+		if (!taskRepoObj.findByParenttask(taskId).isEmpty()) {
+			childrenTasks = taskRepoObj.findByParenttask(taskId);
 		}
 
 		return childrenTasks;
