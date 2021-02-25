@@ -61,7 +61,8 @@ var table = new Tabulator("#tabulator-main", {
   },
 });
 
-$("#tabulator-main").tabulator("setData", tabledata);
+// table.setData(tabledata);
+// $("#tabulator-main").tabulator("setData", tabledata);
 
 
 //select row on "select" button click
