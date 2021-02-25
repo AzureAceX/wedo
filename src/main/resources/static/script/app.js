@@ -18,14 +18,11 @@
 //
 // });
 
-var app = angular.module('myApp', [
-'ngRoute',
-'WedoController'
-]);
+var app = angular.module('myApp', ['ngRoute','WedoController']);
 
 app.config(['$routeProvider',
   function($routeProvider) {
-    $routeProvider.
+    $routeProvider
       .when('/', {
       templateUrl: "altTask.html",
       })
