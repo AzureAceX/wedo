@@ -45,6 +45,7 @@ app.factory("WedoSerivce", function ($http) {
   // };
 
   var createTask = function (data, cb) {
+    console.log(data);
     $http({
       method: "POST",
       // url: "http://localhost:8761/tasks/create",

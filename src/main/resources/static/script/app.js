@@ -27,10 +27,10 @@ app.config(['$routeProvider',
       // // templateUrl: ".html",
       // template : "<h1>Test Route</h1><p>If you cannot see this well...</p>"
       // })
-      .when('/task', {
+      .when('/tasks', {
         templateUrl: "tasks.html",
       })
-      .when('/altTask', {
+      .when('/tasks/alt', {
         templateUrl: "altTask.html",
       })
       .when('/test', {

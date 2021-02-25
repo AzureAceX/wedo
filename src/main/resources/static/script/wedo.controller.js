@@ -14,12 +14,11 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
       });
     };
 
-    //List Employees for employee view page - runs on app load
-    // LawwaService.listEmployees(function (err, data) {
-    //   if (!err) {
-    //     $scope.employeesList = data;
-    //   }
-    // });
+    WedoSerivce.listTasks(function (err, data) {
+      if (!err) {
+        $scope.taskList = data;
+      }
+    });
 
     // Log in functionality
     // $scope.login = function () {
@@ -55,10 +54,10 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
       $scope.closeModal();
     };
 
-    //   $scope.updateEmployee = function() {
-    //     LawwaService.updateEmployee(function (err, data){
+    //   $scope.updateTask = function() {
+    //     WedoSerivce.updateTask(function (err, data){
     //         if (!err) {
-    //             $scope.employees = data;
+    //             $scope.tasks = data;
     //             console.log(data);
     //        }
     //     })
