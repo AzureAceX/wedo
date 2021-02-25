@@ -24,7 +24,8 @@ app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider
       .when('/', {
-      templateUrl: "#/altTask.html",
+      // templateUrl: ".html",
+      template : "<h1>Test Route</h1><p>If you cannot see this well gg.</p>"
       })
       .when('/task', {
         templateUrl: "./tasks.html",
