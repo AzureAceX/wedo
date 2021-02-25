@@ -57,7 +57,7 @@ class TaskController {
 
 	@PostMapping(value = "/create")
 	public Task create(@RequestBody Task taskDto) {
-		Task taskObj = new TaskObj();
+		Task taskObj = new Task();
 		System.out.println("and now here");
 		System.out.println("and now here" + taskDto.getTaskid());
 		try {
