@@ -1,27 +1,14 @@
-// var app = angular.module("myApp", ['ngRoute']);
-//
-// app.config(function ($routeProvider) {
-//
-//   $routeProvider
-//     .when("/", {
-//       templateUrl: "altTask.html",
-//     })
-//     .when("/task", {
-//         templateUrl: "tasks.html",
-//       })
-//     .when("/test", {
-//       template : "<h1>Test Route</h1><p>If you cannot see this well gg.</p>"
-//     })
-//     .otherwise({
-//       redirectTo: "/",
-//     });
-//
-// });
-
 var app = angular.module('myApp', ['ngRoute']);
 
+
+
 app.config(['$routeProvider',
-  function($routeProvider) {
+  function($routeProvider, $locationProvider) {
+
+    if(window.history && window.history.pushState){
+      $locationProvider.html5Mode(true);
+    }
+    
     $routeProvider
       // .when('/', {
       // // templateUrl: ".html",
@@ -37,6 +24,6 @@ app.config(['$routeProvider',
         template : "<h1>Test Route</h1><p>If you cannot see this then you've seen it.</p>"
       })
       .otherwise({
-        redirectTo: '/task'
+        redirectTo: '/tasks'
       });
   }]);
