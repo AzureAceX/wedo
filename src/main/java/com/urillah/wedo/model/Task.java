@@ -28,7 +28,7 @@ import lombok.Data;
 
     private String attachment;
 
-    private String status;
+    private Integer status;
 
 
 }

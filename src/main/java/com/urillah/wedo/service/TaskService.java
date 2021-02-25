@@ -10,6 +10,8 @@ import com.urillah.wedo.dto.TaskDTO;
 import com.urillah.wedo.model.Task;
 import com.urillah.wedo.repository.TaskRepository;
 
+import util.Status;
+
 @Service
 public class TaskService {
 
@@ -41,7 +43,7 @@ public class TaskService {
 
 		// Set all children to complete (even those previously on complete state)
 		for (Task update : childrenTasks) {
-			update.setStatus("COMPLETE");
+			update.setStatus(Status.COMPLETE.ordinal());
 		}
 		taskRepoObj.saveAll(childrenTasks);
 
@@ -54,8 +56,7 @@ public class TaskService {
 
 		// Get all updatable children - done or complete
 		for (Task childToUpdate : childrenTasks) {
-			if ("DONE".equalsIgnoreCase(childToUpdate.getStatus())
-					|| "COMPLETE".equalsIgnoreCase(childToUpdate.getStatus())) {
+			if (Status.DONE.ordinal() ==  childToUpdate.getStatus() || Status.COMPLETE.ordinal() == childToUpdate.getStatus()) {
 				updatingChild.add(childToUpdate);
 			}
 		}

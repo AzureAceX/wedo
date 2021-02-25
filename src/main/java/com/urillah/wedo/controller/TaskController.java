@@ -20,6 +20,8 @@ import com.urillah.wedo.model.Task;
 import com.urillah.wedo.repository.TaskRepository;
 import com.urillah.wedo.service.TaskService;
 
+import util.Status;
+
 @RestController
 @RequestMapping("/tasks")
 class TaskController {
@@ -66,7 +68,7 @@ class TaskController {
 		Task taskObj = new Task();
 		try {
 			taskObj = modelMapper.map(taskDto, Task.class);
-			taskObj.setStatus("PENDING"); //All start from pending
+			taskObj.setStatus(Status.PENDING.ordinal()); //All start from pending
 			taskObj.setPriority(1); //All start from pendinng
 			taskRepositoryObj.save(taskObj);
 			System.out.println("saving {}" + taskObj);
@@ -86,17 +88,17 @@ class TaskController {
 			
 			//STATUS is incremental, can only go upwards.
 			switch(taskDto.getStatus()) {
-			case "PENDING":
-				taskObj.setStatus("DONE");
+			case 0:
+				taskObj.setStatus(Status.DONE.ordinal());
 				break;
-			case "DONE":
+			case 1:
 				if(!taskServiceObj.hasChild(taskDto.getTaskid())) {
-					taskObj.setStatus("COMPLETE");
+					taskObj.setStatus(Status.COMPLETE.ordinal());
 				}
 				
 				List<Task> childrenTasks =  taskServiceObj.getChilds(taskDto.getTaskid());
 				if(taskServiceObj.validateFamilyUpdate(childrenTasks)) {
-					taskObj.setStatus("COMPLETE");
+					taskObj.setStatus(Status.COMPLETE.ordinal());
 				}
 				System.out.println("STATUS SHALL REMAIN DONE UNTIL CHILDREN TASKS ARE COMPLETED");
 				break;
