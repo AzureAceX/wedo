@@ -5,6 +5,7 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
     $scope.updateTask = {};
     $scope.taskList = [];
     $scope.validTask = false;
+    $scope.taskCount;
 
     //List tasks - to run on app load
     $scope.listTasks = function () {
@@ -13,6 +14,7 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
           toastr.info("Loading Tasks");
           console.log(data);
           $scope.taskList = data;
+          $scope.taskCount = data.length;
         }
       });
     };

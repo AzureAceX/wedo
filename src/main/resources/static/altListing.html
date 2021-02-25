@@ -1,25 +1,10 @@
-<div class="container">
-  <h2>Tasks</h2>
-  <div class="clearfix"></div>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Index</th>
-        <th>Name</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="task in tasklist">
-        <td>{{task.taskid}}</td>
-        <td>{{task.name}}</td>
-        <td>{{task.status}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div class="col-8 col-sm-8 col-md-8 d-flex p-2 justify-content-center mb-5">
-      <a type="button" class="btn btn-info mr-2" href="/tasks">View Tasks</a>
-      <a type="button" class="btn btn-info mr-2" href="/alt">Alternate</a>
+<div>
+  <!-- <button id="select-row">Select "Oli Bob"</button>
+  <button id="deselect-row">Deselect "Oli Bob"</button> -->
+  <button id="select-all">Select All</button>
+  <button id="deselect-all">Deselect All</button>
 
+  <span id="select-stats"></span>
 </div>
+
+<div id="tabulator-main"></div>

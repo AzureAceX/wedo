@@ -23,15 +23,18 @@
         <th>Description</th>
         <!-- <th>Parent Task</th> -->
         <th>Status</th>
+        <th></th>
+        <th>{{taskCount}}</th>
+
         <!-- <th>Priority</th> -->
 				<!-- <th>Action</th> -->
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="task in taskList">
-        <td><a href="#/{{task.taskid}}">{{task.taskid}}</a></td>
-        <td>{{task.name}}</td>
-        <td>{{task.desecription}}</td>
+        <td>{{task.taskid}}</td>
+        <td><a href="/task/{{task.taskid}}">{{task.name}}</a></td>
+        <td>{{task.description}}</td>
         <td>{{task.status}}</td>
         <!-- <td>{{task.employeeId}}</td> -->
         <td style="text-align: center;">
