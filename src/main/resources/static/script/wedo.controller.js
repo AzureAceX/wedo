@@ -33,7 +33,7 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
     };
 
       $scope.updateTaskDetails = function() {
-        WedoSerivce.updateTask($scope.updateTask, function (err, data){
+        WedoSerivce.updateTaskDetails($scope.updateTask, function (err, data){
             if (!err) {
                 $scope.tasks = data;
                 console.log($scope.tasks);

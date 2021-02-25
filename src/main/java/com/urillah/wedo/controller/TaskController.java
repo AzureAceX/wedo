@@ -66,7 +66,8 @@ class TaskController {
 		Task taskObj = new Task();
 		try {
 			taskObj = modelMapper.map(taskDto, Task.class);
-			taskObj.setStatus("PENDING"); //All start from pendinng
+			taskObj.setStatus("PENDING"); //All start from pending
+			taskObj.setPriority(1); //All start from pendinng
 			taskRepositoryObj.save(taskObj);
 			System.out.println("saving {}" + taskObj);
 			return taskObj;

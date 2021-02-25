@@ -9,7 +9,7 @@ import lombok.Data;
     private String name;
     private String description;
     private Integer parenttask;
-    private String priority;
+    private Integer priority;
     private String attachment;
     private String status;
 
