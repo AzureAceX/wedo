@@ -107,7 +107,7 @@ var tabledata = [
 // var tabledata = $scope.taskList;
 
 //Build Tabulator
-var table = new Tabulator("#tabulator-main", {
+var table = new Tabulator("tabulator-main", {
   height:"311px",
   selectable:true, //make rows selectable
   columns:[
