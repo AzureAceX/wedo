@@ -3,13 +3,14 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
     //Create task
     $scope.newTask = {};
     $scope.updateTask = {};
-    $scope.taskList = {};
+    $scope.taskList = [];
     $scope.validTask = false;
 
     //List tasks - to run on app load
     $scope.listTasks = function () {
       WedoSerivce.listTasks(function (err, data) {
         if (!err) {
+          console.log(data);
           $scope.taskList = data;
           toastr.info("Loading Tasks");
         }
@@ -17,10 +18,6 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
     };
 
     $scope.createTask = function () {
-      // if($scope.newTask.parenttask){
-        // WedoSerivce.validateParent
-          //search if its there, if it is add child column?
-      // }
       if($scope.validateTask()){
         WedoSerivce.createTask($scope.newTask, function (err, data) {
           if (!err) {
@@ -44,13 +41,17 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
       //   })
       // };
 
-      $scope.updateTaskStatus = function() {
-        WedoSerivce.updateTask(function (err, data){
-            if (!err) {
-                $scope.tasks = data;
-                console.log(data);
-           }
-        })
+      $scope.updateTaskStatus = function (index) {
+
+          var name = $scope.taskList[index].Name;
+          $window.alert("Name: " + name );
+
+        // WedoSerivce.updateTaskStatus(function (err, data){
+        //     if (!err) {
+        //         // $scope.tasks = data;
+        //         console.log(data);
+        //    }
+        // })
       };
 
 
@@ -69,9 +70,9 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
       $scope.validTask = true;
  
        if(!$scope.newTask.name || !$scope.newTask.description){
-         console.log('Your Task Must Have A Name And A Description');
+         toastr.warning('Your Task Must Have A Name And A Description');
          $scope.validTask = false;
-         return ;
+         return;
        }
  
        return $scope.validTask;

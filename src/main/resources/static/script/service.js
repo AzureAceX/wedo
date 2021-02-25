@@ -8,7 +8,6 @@ app.factory("WedoSerivce", function ($http) {
       url: "https://azureace-wedo.herokuapp.com/tasks/list",
     }).success(function (data, status, headers, config) {
         cb(null, data);
-        // $scope.taskList = data;
       })
       .error(function (data, status, headers, config) {
         cb(data);
