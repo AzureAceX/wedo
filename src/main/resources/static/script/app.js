@@ -24,15 +24,15 @@ app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider
       .when('/', {
-      templateUrl: "altTask.html",
+      templateUrl: "./altTask.html",
       })
       .when('/task', {
-        templateUrl: "tasks.html",
+        templateUrl: "./tasks.html",
       })
       .when('/test', {
         template : "<h1>Test Route</h1><p>If you cannot see this well gg.</p>"
       })
-      .otherwise({
-        redirectTo: '/'
-      });
+      // .otherwise({
+      //   redirectTo: '/'
+      // });
   }]);
