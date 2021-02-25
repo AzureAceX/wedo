@@ -7,9 +7,9 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
     console.log("o ye have made it this far");
 
     //List tasks - to run on app load
-    $scope.listTasks = function () {  
+    $scope.listTasks = function () {
       WedoSerivce.listTasks(function (err, data) {
-        console.log("load me too");
+        console.log("load me too" );
         if (!err) {
           $scope.taskList = data;
         }
@@ -17,9 +17,9 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
     };
 
     WedoSerivce.listTasks(function (err, data) {
-      console.log("load me?");
       if (!err) {
         $scope.taskList = data;
+        console.log("load me?" + data);
       }
     });
 
