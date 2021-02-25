@@ -2,7 +2,7 @@ var app = angular.module('myApp', ['ngRoute']);
 
 
 
-app.config(['$routeProvider', '$locationProvider'
+app.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
 
     if(window.history && window.history.pushState){
