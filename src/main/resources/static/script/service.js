@@ -44,7 +44,7 @@ app.factory("WedoSerivce", function ($http) {
   //     });
   // };
 
-  var createTask = function (cb, data) {
+  var createTask = function (data,cb) {
     console.log(data);
     $http({
       method: "POST",
