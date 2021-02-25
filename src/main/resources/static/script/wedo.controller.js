@@ -16,12 +16,12 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
       });
     };
 
-    WedoSerivce.listTasks(function (err, data) {
-      if (!err) {
-        $scope.taskList = data;
-        console.log("load me?" + data);
-      }
-    });
+    // WedoSerivce.listTasks(function (err, data) {
+    //   if (!err) {
+    //     $scope.taskList = data;
+    //     console.log("load me?" + data);
+    //   }
+    // });
 
     // Log in functionality
     // $scope.login = function () {
@@ -54,17 +54,31 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
         }
       });
       alert("Saving Task");
+      //toastr.success("Adding Task");
+
       $scope.closeModal();
+
+      //relaod listing
+      $scope.listTasks();
     };
 
-    //   $scope.updateTask = function() {
-    //     WedoSerivce.updateTask(function (err, data){
-    //         if (!err) {
-    //             $scope.tasks = data;
-    //             console.log(data);
-    //        }
-    //     })
-    //   };
+      // $scope.updateTaskDetails = function(var updateDetails) {
+      //   WedoSerivce.updateTask(updateDetails, function (err, data){
+      //       if (!err) {
+      //           $scope.tasks = data;
+      //           console.log(data);
+      //      }
+      //   })
+      // };
+
+      // $scope.updateTaskStatus = function() {
+      //   WedoSerivce.updateTask(function (err, data){
+      //       if (!err) {
+      //           $scope.tasks = data;
+      //           console.log(data);
+      //      }
+      //   })
+      // };
 
 
     $scope.closeModal = function () {

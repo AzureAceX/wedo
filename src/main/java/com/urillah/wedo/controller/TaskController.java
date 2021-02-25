@@ -58,19 +58,19 @@ class TaskController {
 	@PostMapping(value = "/create")
 	public Task create(@RequestBody Task taskDto) {
 		Task taskObj = new Task();
-		System.out.println("and now here");
-		System.out.println("and now here" + taskDto.getTaskid());
 
 		// taskRepositoryObj.save(taskDto);
 		// return taskDto;
 
 		try {
 			taskObj = modelMapper.map(taskDto, Task.class);
+			System.out.println("and now here");
 			taskRepositoryObj.save(taskObj);
 
 			//Model mapping failed
 			if(taskObj.getName() == null && taskDto.getName() != null){
 				taskObj.setName(taskDto.getName());
+				System.out.println("and now here in mapping fail" + taskDto.getTaskid());
 				taskRepositoryObj.save(taskObj);
 			}
 
@@ -79,6 +79,7 @@ class TaskController {
 			System.out.println("Creation failed {}" + taskDto);
 			return taskObj;
 		}
+		
 	}
 
     @PutMapping(value = "/update-status")
