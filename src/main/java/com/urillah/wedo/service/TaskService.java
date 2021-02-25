@@ -11,7 +11,7 @@ import com.urillah.wedo.model.Task;
 import com.urillah.wedo.repository.TaskRepository;
 
 @Service
-public class WeDoService {
+public class TaskService {
 
 	@Autowired
 	private TaskRepository taskRepoObj;
@@ -37,21 +37,21 @@ public class WeDoService {
 	// }
 
 	//updateTask Family - parent and all its child
-//	public List<Task> updateFamily(TaskDTO taskDTO) {
-//		List<Task> taskFamily = new ArrayList<>();
-//
-//		//provided its not somehow missing from DB, add the given task to family tree first
-//		if(taskRepoObj.findById(taskDTO.getTaskid()).isPresent())
-//			taskFamily.add(taskRepoObj.findByTaskid(taskDTO.getTaskid()));
-//
-//		//if it has a parent add said parent.
-//		if(taskDTO.getParenttask() != null)
-//			taskFamily.add(taskRepoObj.findByTaskid(taskDTO.getTaskid()));
-//
-//
-//		return childrenTasks;
-//	}
-//
+	public List<Task> updateFamily(TaskDTO taskDTO) {
+		List<Task> taskFamily = new ArrayList<>();
+
+		//provided its not somehow missing from DB, add the given task to family tree first
+		if(taskRepoObj.findById(taskDTO.getTaskid()).isPresent())
+			taskFamily.add(taskRepoObj.findByTaskid(taskDTO.getTaskid()));
+
+		//if it has a parent add said parent.
+		if(taskDTO.getParenttask() != null)
+			taskFamily.add(taskRepoObj.findByTaskid(taskDTO.getTaskid()));
+
+
+		return childrenTasks;
+	}
+
 
 
 }
