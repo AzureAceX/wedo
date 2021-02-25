@@ -10,9 +10,9 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
     $scope.listTasks = function () {
       WedoSerivce.listTasks(function (err, data) {
         if (!err) {
+          toastr.info("Loading Tasks");
           console.log(data);
           $scope.taskList = data;
-          toastr.info("Loading Tasks");
         }
       });
     };
@@ -28,18 +28,19 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
   
         //relaod listing
         $scope.listTasks();
-        $scope.closeModal();
+        $scope.closeCreateModal();
       }
     };
 
-      // $scope.updateTaskDetails = function(var updateDetails) {
-      //   WedoSerivce.updateTask(updateDetails, function (err, data){
-      //       if (!err) {
-      //           $scope.tasks = data;
-      //           console.log(data);
-      //      }
-      //   })
-      // };
+      $scope.updateTaskDetails = function() {
+        WedoSerivce.updateTask($scope.updateTask, function (err, data){
+            if (!err) {
+                $scope.tasks = data;
+                console.log($scope.tasks);
+           }
+        })
+        $scope.listTasks();
+      };
 
       $scope.updateTaskStatus = function (index) {
 

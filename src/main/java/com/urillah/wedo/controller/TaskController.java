@@ -37,6 +37,7 @@ class TaskController {
 	public List<Task> getAll() {
 		List<Task> tasks = new ArrayList<>();
 		taskRepositoryObj.findAll().forEach(tasks::add);
+		System.out.println(tasks.size());
 		return tasks;
 	}
 
@@ -67,6 +68,7 @@ class TaskController {
 			taskObj = modelMapper.map(taskDto, Task.class);
 			taskObj.setStatus("PENDING"); //All start from pendinng
 			taskRepositoryObj.save(taskObj);
+			System.out.println("saving {}" + taskObj);
 			return taskObj;
 		} catch (Exception e) {
 			System.out.println("Creation failed {}" + taskDto);
