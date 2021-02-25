@@ -72,7 +72,7 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
     };
 
 
-    $scope.validateTask = function($scope.newTask){
+    $scope.validateTask = function(){
      $scope.validTask = true;
 
       if(!$scope.newTask.name || !$scope.newTask.description){
