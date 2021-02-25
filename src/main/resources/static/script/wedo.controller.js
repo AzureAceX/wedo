@@ -116,7 +116,7 @@ console.log("bare minimum");
     // }
 
 
-    // 
+    //
     // $scope.closeModal = function () {
     //   $scope.newTask = {};
     // };
