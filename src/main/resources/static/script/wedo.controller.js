@@ -3,8 +3,9 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
     //Create task
     $scope.newTask = {};
     $scope.taskList = {};
+    $scope.validTask = false;
 
-    console.log("o ye have made it this far");
+    // console.log("o ye have made it this far");
 
     //List tasks - to run on app load
     $scope.listTasks = function () {
@@ -48,6 +49,15 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
     // };
 
     $scope.createTask = function () {
+
+
+      // if($scope.newTask.parenttask){
+        // WedoSerivce.validateParent
+          //search if its there, if it is add child column?
+      // }
+
+      $scope.validateTask();
+
       WedoSerivce.createTask($scope.newTask, function (err, data) {
         if (!err) {
           console.log(data);
@@ -56,11 +66,23 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
       alert("Saving Task");
       //toastr.success("Adding Task");
 
-      $scope.closeModal();
-
       //relaod listing
       $scope.listTasks();
+      $scope.closeModal();
     };
+
+
+    $scope.validateTask = function($scope.newTask){
+     $scope.validTask = true;
+
+      if(!$scope.newTask.name || !$scope.newTask.description){
+        console.log('Your Task Must Have A Name And A Description');
+        $scope.validTask = false;
+        return;
+      }
+
+      return $scope.validTask;
+    }
 
       // $scope.updateTaskDetails = function(var updateDetails) {
       //   WedoSerivce.updateTask(updateDetails, function (err, data){

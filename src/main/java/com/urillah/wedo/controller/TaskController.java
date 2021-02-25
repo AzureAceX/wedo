@@ -33,7 +33,7 @@ class TaskController {
 	public List<Task> getAll() {
 		List<Task> tasks = new ArrayList<>();
 		taskRepositoryObj.findAll().forEach(tasks::add);
-		System.out.println("we here");
+		// System.out.println("we here");
 		return tasks;
 	}
 
@@ -59,27 +59,24 @@ class TaskController {
 	public Task create(@RequestBody Task taskDto) {
 		Task taskObj = new Task();
 
-		// taskRepositoryObj.save(taskDto);
-		// return taskDto;
-
 		try {
 			taskObj = modelMapper.map(taskDto, Task.class);
-			System.out.println("and now here");
+			// System.out.println("and now here");
 			taskRepositoryObj.save(taskObj);
 
-			//Model mapping failed
-			if(taskObj.getName() == null && taskDto.getName() != null){
-				taskObj.setName(taskDto.getName());
-				System.out.println("and now here in mapping fail" + taskDto.getTaskid());
-				taskRepositoryObj.save(taskObj);
-			}
+			// //Model mapping failed - workaround
+			// if(taskObj.getName() == null && taskDto.getName() != null){
+			// 	taskObj.setName(taskDto.getName());
+			// 	System.out.println("and now here in mapping fail" + taskDto.getTaskid());
+			// 	taskRepositoryObj.save(taskObj);
+			// }
 
 			return taskObj;
 		} catch (Exception e) {
 			System.out.println("Creation failed {}" + taskDto);
 			return taskObj;
 		}
-		
+
 	}
 
     @PutMapping(value = "/update-status")

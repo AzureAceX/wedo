@@ -8,26 +8,26 @@ app.factory("WedoSerivce", function ($http) {
       url: "https://azureace-wedo.herokuapp.com/tasks/list",
     }).success(function (data, status, headers, config) {
         cb(null, data);
-        console.log("tasks {}" + data);
+        $scope.taskList = data;
       })
       .error(function (data, status, headers, config) {
         cb(data);
       });
   };
 
-//   var update = function (data, cb) {
-//     $http({
-//       method: "PUT",
-//       url: "http://localhost:8761//" + data.id ,
-//       data: data,
-//     })
-//       .success(function (data, status, headers, config) {
-//         cb(null, data);
-//       })
-//       .error(function (data, status, headers, config) {
-//         cb(data);
-//       });
-//   };
+  // var update = function (data, cb) {
+  //   $http({
+  //     method: "PUT",
+  //     url: "http://localhost:8761//" + data.id ,
+  //     data: data,
+  //   })
+  //     .success(function (data, status, headers, config) {
+  //       cb(null, data);
+  //     })
+  //     .error(function (data, status, headers, config) {
+  //       cb(data);
+  //     });
+  // };
 
 
 //gett one

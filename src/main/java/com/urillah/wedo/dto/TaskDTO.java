@@ -9,8 +9,8 @@ import lombok.Data;
     private String name;
     private String description;
     private Integer parenttask;
-    private Integer priority;
+    private String priority;
     private String attachment;
     private Integer status;
-    
+
 }
