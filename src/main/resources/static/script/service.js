@@ -30,6 +30,7 @@ app.factory("WedoSerivce", function ($http) {
 //   };
 
 
+//gett one
   //   var  = function (param, param, cb) {
   //   $http({
   //     method: "GET",
