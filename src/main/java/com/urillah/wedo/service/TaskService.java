@@ -23,7 +23,7 @@ public class TaskService {
 	// 		hasChild = true;
 	// 	}
 	// 	return hasChild;
-	}
+	// }
 
 	//get list of children of given task
 	// public List<Task> getChilds(Integer taskId) {
