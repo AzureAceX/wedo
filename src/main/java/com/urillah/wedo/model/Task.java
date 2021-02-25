@@ -13,21 +13,22 @@ import lombok.Data;
 
     @Id
     @Column(name = "taskid", unique = true, nullable = false)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer taskid;
-    
+
     private String teamid;
 
     private String name;
-    
+
     private String description;
-    
+
     private Integer parenttask;
-    
+
     private Integer priority;
 
     private String attachment;
-    
+
     private Integer status;
-    
+
 
 }
