@@ -1,0 +1,20 @@
+<div class="container">
+  <h2>Tasks</h2>
+  <div class="clearfix"></div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Index</th>
+        <th>Name</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="task in tasklist">
+        <td>{{task.taskid}}</td>
+        <td>{{task.name}}</td>
+        <td>{{task.status}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

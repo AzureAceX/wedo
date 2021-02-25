@@ -29,9 +29,6 @@ class TaskController {
 	@Autowired
 	private ModelMapper modelMapper;
 
-//    @Autowired
-//    AccountDetailsRepository accountDetailsRepositoryObj;
-
 	@GetMapping(value = "/list")
 	public List<Task> getAll() {
 		List<Task> tasks = new ArrayList<>();
@@ -40,9 +37,9 @@ class TaskController {
 		return tasks;
 	}
 
-//	@GetMapping(value = "/{accountId}")
-//	public Account getById(@PathVariable("accountId") Long accountId) {
-//		return accountRepositoryObj.findOne(accountId);
+//	@GetMapping(value = "/{}")
+//	public Task getById(@PathVariable("taskid") Long taskId) {
+//		return taskRepositoryObj.findById(taskId);
 //	}
 
 	@PostMapping(value = "/create")
@@ -60,7 +57,7 @@ class TaskController {
     @PutMapping(value = "/update-status")
     public ResponseEntity<Task> udpateTaskStatus(@RequestBody Task taskDto) {
     	Task taskObj = new Task();
-    	
+
 		if(taskRepositoryObj.findById(taskDto.getTaskid()).isPresent()) {
 			taskObj.setStatus(taskDto.getStatus());
 			taskRepositoryObj.save(taskObj);
@@ -69,23 +66,38 @@ class TaskController {
 
 		return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
     }
-    
-//	@DeleteMapping(value = "/{accountId}")
-//	public ResponseEntity<HttpStatus> delete(@PathVariable("accountId") Long accountId) {
+
+		@PutMapping(value = "/update-bulk")
+		public ResponseEntity<Task> bulkUpdate(List<Task> taskList) {
+
+			for(Task task : tasklist){
+				if(taskRepositoryObj.findById(task.getTaskid()).isPresent()) {
+
+					Task taskObj = taskRepositoryObj.findById(task.getTaskid()).get();
+					taskObj.setStatus(taskDto.getStatus());
+					taskRepositoryObj.save(taskObj);
+					return new ResponseEntity<>(taskObj, HttpStatus.OK);
+				}
+			}
+
+		return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+
+		}
+
+
+//	@DeleteMapping(value = "/{taskid}")
+//	public ResponseEntity<HttpStatus> delete(@PathVariable("taskid") Long taskId) {
 //		try {
-//			accountRepositoryObj.delete(accountId);
+//			taskRepositoryObj.delete(taskId);
 //			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 //		} catch (Exception e) {
 //			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
 //		}
 //	}
 
-	/*
-	 * Account Login
-	 */
-
-//	@GetMapping(value = "/{username}")
-//	public Task findByUsername(@PathVariable("username") String username) {
-//		return accountRepositoryObj.findByUsername(username);
+//	@GetMapping(value = "/{taskname}")
+//	public Task findByTaskName(@PathVariable("name") String taskName) {
+//		return taskRepositoryObj.findByName(taskName);
 //	}
+
 }
