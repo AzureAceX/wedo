@@ -3,7 +3,7 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
     //Create task
     $scope.newTask = {};
 
-    console.log("bare minimum");
+    console.log("o ye have made it this far");
 
     //List tasks - to run on app load
     $scope.listTasks = function () {

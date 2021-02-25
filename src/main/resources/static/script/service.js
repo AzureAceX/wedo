@@ -44,16 +44,16 @@ app.factory("WedoSerivce", function ($http) {
   //     });
   // };
 
-  var createTask = function (data, cb) {
+  var createTask = function (cb, data) {
     console.log(data);
     $http({
       method: "POST",
       // url: "http://localhost:8761/tasks/create",
       url: "https://azureace-wedo.herokuapp.com/tasks/create",
       data: JSON.stringify(data),
-    })
-      .success(function (data, status, headers, config) {
+    }).success(function (data, status, headers, config) {
         cb(null, data);
+        console.log(data);
       })
       .error(function (data, status, headers, config) {
         cb(data);

@@ -18,7 +18,7 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: "tasks.html",
       })
       .when('/tasks/alt', {
-        templateUrl: "altTask.html",
+        templateUrl: "altListing.html",
       })
       .when('/test', {
         template : "<h1>Test Route</h1><p>If you cannot see this then you've seen it.</p>"
