@@ -60,14 +60,18 @@ class TaskController {
 		Task taskObj = new Task();
 		System.out.println("and now here");
 		System.out.println("and now here" + taskDto.getTaskid());
-		try {
-			taskObj = modelMapper.map(taskDto, Task.class);
-			taskRepositoryObj.save(taskObj);
-			return taskObj;
-		} catch (Exception e) {
-			System.out.println("Creation failed {}" + taskDto);
-			return taskObj;
-		}
+
+		taskRepositoryObj.save(taskDto);
+
+		return taskDto;
+		// try {
+		// 	taskObj = modelMapper.map(taskDto, Task.class);
+		// 	taskRepositoryObj.save(taskObj);
+		// 	return taskObj;
+		// } catch (Exception e) {
+		// 	System.out.println("Creation failed {}" + taskDto);
+		// 	return taskObj;
+		// }
 	}
 
     @PutMapping(value = "/update-status")
