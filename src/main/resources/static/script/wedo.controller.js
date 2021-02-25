@@ -6,85 +6,34 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
     $scope.taskList = {};
     $scope.validTask = false;
 
-    // console.log("o ye have made it this far");
-
     //List tasks - to run on app load
     $scope.listTasks = function () {
       WedoSerivce.listTasks(function (err, data) {
-        console.log("load me too" );
         if (!err) {
           $scope.taskList = data;
-          toastr.success("Task Created");
+          toastr.info("Loading Tasks");
         }
       });
     };
 
-    // WedoSerivce.listTasks(function (err, data) {
-    //   if (!err) {
-    //     $scope.taskList = data;
-    //     console.log("load me?" + data);
-    //   }
-    // });
-
-    // Log in functionality
-    // $scope.login = function () {
-    //   $scope.resetRegistryObj();
-
-    //   //get employee using username/pass
-    //   if (!$scope.username || !$scope.password) {
-    //     alert("Please Enter Your Login Details");
-    //     return;
-    //   }
-
-    //   LawwaService.getEmployeeAccount(
-    //     $scope.username,
-    //     $scope.password,
-    //     function (err, data) {
-    //       if (!err) {
-    //         $scope.logInObj.employee = data;
-    //         $scope.sessionInfo.employeeId = $scope.logInObj.employee.employeeId;
-    //         $scope.sessionInfo.signInTime = getDateTime();
-    //         $scope.completeLogin($scope.sessionInfo);
-    //       }
-    //     }
-    //   );
-    // };
-
     $scope.createTask = function () {
-
-
       // if($scope.newTask.parenttask){
         // WedoSerivce.validateParent
           //search if its there, if it is add child column?
       // }
-
-      $scope.validateTask();
-
-      WedoSerivce.createTask($scope.newTask, function (err, data) {
-        if (!err) {
-          console.log(data);
-        }
-      });
-      alert("Saving Task");
-      //toastr.success("Adding Task");
-
-      //relaod listing
-      $scope.listTasks();
-      $scope.closeModal();
-    };
-
-
-    $scope.validateTask = function(){
-     $scope.validTask = true;
-
-      if(!$scope.newTask.name || !$scope.newTask.description){
-        console.log('Your Task Must Have A Name And A Description');
-        $scope.validTask = false;
-        return;
+      if($scope.validateTask()){
+        WedoSerivce.createTask($scope.newTask, function (err, data) {
+          if (!err) {
+            console.log(data);
+          }
+        });
+        toastr.success("Task Created");
+  
+        //relaod listing
+        $scope.listTasks();
+        $scope.closeModal();
       }
-
-      return $scope.validTask;
-    }
+    };
 
       // $scope.updateTaskDetails = function(var updateDetails) {
       //   WedoSerivce.updateTask(updateDetails, function (err, data){
@@ -95,16 +44,19 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
       //   })
       // };
 
-      // $scope.updateTaskStatus = function() {
-      //   WedoSerivce.updateTask(function (err, data){
-      //       if (!err) {
-      //           $scope.tasks = data;
-      //           console.log(data);
-      //      }
-      //   })
-      // };
+      $scope.updateTaskStatus = function() {
+        WedoSerivce.updateTask(function (err, data){
+            if (!err) {
+                $scope.tasks = data;
+                console.log(data);
+           }
+        })
+      };
 
 
+      /***
+       * UTILITY FUNCTIONS
+       */
     $scope.closeCreateModal = function () {
       $scope.newTask = {};
     };
@@ -112,6 +64,18 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
     $scope.closeUpdateModal = function () {
       $scope.updateTask = {};
     };
+    
+    $scope.validateTask = function(){
+      $scope.validTask = true;
+ 
+       if(!$scope.newTask.name || !$scope.newTask.description){
+         console.log('Your Task Must Have A Name And A Description');
+         $scope.validTask = false;
+         return ;
+       }
+ 
+       return $scope.validTask;
+     }
 
     //On page load
     $scope.listTasks();

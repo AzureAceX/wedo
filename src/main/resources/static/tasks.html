@@ -35,8 +35,10 @@
         <td>{{task.status}}</td>
         <!-- <td>{{task.employeeId}}</td> -->
         <td style="text-align: center;">
-					<button>Edit Details</button>
-					<button>Update Status</button>
+          <button type="button" class="btn btn-success btn-lg pull-right float-right" data-toggle="modal" data-target="#updateModal">
+          Update Details
+          </button>
+					<button class="btn btn-secondary btn-lg" >Update Status</button>
 				</td>
       </tr>
     </tbody>
@@ -165,7 +167,7 @@
 
 
 
-<div id="myModal" class="modal fade" role="dialog">
+<div id="udpateModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
