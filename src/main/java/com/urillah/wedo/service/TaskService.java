@@ -23,7 +23,7 @@ public class TaskService {
 	// 		hasChild = true;
 	// 	}
 	// 	return hasChild;
-	}
+	// }
 
 	//get list of children of given task
 	// public List<Task> getChilds(Integer taskId) {
@@ -37,20 +37,20 @@ public class TaskService {
 	// }
 
 	//updateTask Family - parent and all its child
-	public List<Task> updateFamily(TaskDTO taskDTO) {
-		List<Task> taskFamily = new ArrayList<>();
-
-		//provided its not somehow missing from DB, add the given task to family tree first
-		if(taskRepoObj.findById(taskDTO.getTaskid()).isPresent())
-			taskFamily.add(taskRepoObj.findByTaskid(taskDTO.getTaskid()));
-
-		//if it has a parent add said parent.
-		if(taskDTO.getParenttask() != null)
-			taskFamily.add(taskRepoObj.findByTaskid(taskDTO.getTaskid()));
-
-
-		return childrenTasks;
-	}
+	// public List<Task> updateFamily(TaskDTO taskDTO) {
+	// 	List<Task> taskFamily = new ArrayList<>();
+	//
+	// 	//provided its not somehow missing from DB, add the given task to family tree first
+	// 	if(taskRepoObj.findById(taskDTO.getTaskid()).isPresent())
+	// 		taskFamily.add(taskRepoObj.findByTaskid(taskDTO.getTaskid()));
+	//
+	// 	//if it has a parent add said parent.
+	// 	if(taskDTO.getParenttask() != null)
+	// 		taskFamily.add(taskRepoObj.findByTaskid(taskDTO.getTaskid()));
+	//
+	//
+	// 	return taskFamily;
+	// }
 
 
 
