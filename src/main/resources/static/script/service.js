@@ -15,19 +15,19 @@ app.factory("WedoSerivce", function ($http) {
       });
   };
 
-  // var update = function (data, cb) {
-  //   $http({
-  //     method: "PUT",
-  //     url: "http://localhost:8761//" + data.id ,
-  //     data: data,
-  //   })
-  //     .success(function (data, status, headers, config) {
-  //       cb(null, data);
-  //     })
-  //     .error(function (data, status, headers, config) {
-  //       cb(data);
-  //     });
-  // };
+  var updateTask = function (data, cb) {
+    $http({
+      method: "PUT",
+      url: "https://azureace-wedo.herokuapp.com/tasks/update-status",
+      data: data,
+    })
+      .success(function (data, status, headers, config) {
+        cb(null, data);
+      })
+      .error(function (data, status, headers, config) {
+        cb(data);
+      });
+  };
 
 
 //gett one
@@ -53,7 +53,7 @@ app.factory("WedoSerivce", function ($http) {
       data: JSON.stringify(data),
     }).success(function (data, status, headers, config) {
         cb(null, data);
-        console.log(data);
+        toastr.info("Creating Task");
       })
       .error(function (data, status, headers, config) {
         cb(data);
@@ -64,6 +64,7 @@ app.factory("WedoSerivce", function ($http) {
   return {
     listTasks: listTasks,
     createTask: createTask,
+    updateTask: updateTask,
   };
 
 });

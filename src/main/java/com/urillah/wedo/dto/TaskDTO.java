@@ -11,6 +11,6 @@ import lombok.Data;
     private Integer parenttask;
     private String priority;
     private String attachment;
-    private Integer status;
+    private String status;
 
 }

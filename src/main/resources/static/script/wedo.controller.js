@@ -2,6 +2,7 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
 
     //Create task
     $scope.newTask = {};
+    $scope.updateTask = {};
     $scope.taskList = {};
     $scope.validTask = false;
 
@@ -13,6 +14,7 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
         console.log("load me too" );
         if (!err) {
           $scope.taskList = data;
+          toastr.sucess("Task Created");
         }
       });
     };
@@ -103,7 +105,11 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
       // };
 
 
-    $scope.closeModal = function () {
+    $scope.closeCreateModal = function () {
+      $scope.newTask = {};
+    };
+
+    $scope.closeUpdateModal = function () {
       $scope.newTask = {};
     };
 

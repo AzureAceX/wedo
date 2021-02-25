@@ -16,7 +16,7 @@ public class TaskService {
 	@Autowired
 	private TaskRepository taskRepoObj;
 
-	//check if a child exist for given task
+	// check if a child exist for given task
 	public Boolean hasChild(Integer taskId) {
 		Boolean hasChild = false;
 		if (!taskRepoObj.findByParenttask(taskId).isEmpty()) {
@@ -25,7 +25,7 @@ public class TaskService {
 		return hasChild;
 	}
 
-	//get list of children of given task
+	// get list of children of given task
 	public List<Task> getChilds(Integer taskId) {
 		List<Task> childrenTasks = new ArrayList<>();
 
@@ -36,21 +36,37 @@ public class TaskService {
 		return childrenTasks;
 	}
 
-	//updateTask Family - parent and all its child
-	// public List<Task> updateFamily(TaskDTO taskDTO) {
-	// 	List<Task> taskFamily = new ArrayList<>();
-	//
-	// 	//provided its not somehow missing from DB, add the given task to family tree first
-	// 	if(taskRepoObj.findById(taskDTO.getTaskid()).isPresent())
-	// 		taskFamily.add(taskRepoObj.findByTaskid(taskDTO.getTaskid()));
-	//
-	// 	//if it has a parent add said parent.
-	// 	if(taskDTO.getParenttask() != null)
-	// 		taskFamily.add(taskRepoObj.findByTaskid(taskDTO.getTaskid()));
-	//
-	//
-	// 	return taskFamily;
-	// }
+	// get list of children of given task
+	public List<Task> updateFamily(List<Task> childrenTasks) {
+
+		// Set all children to complete (even those previously on complete state)
+		for (Task update : childrenTasks) {
+			update.setStatus("COMPLETE");
+		}
+		taskRepoObj.saveAll(childrenTasks);
+
+		return childrenTasks;
+	}
+	
+	// updateTask Family - parent and all its child
+	public Boolean validateFamilyUpdate(List<Task> childrenTasks) {
+		List<Task> updatingChild = new ArrayList<Task>();
+
+		// Get all updatable children - done or complete
+		for (Task childToUpdate : childrenTasks) {
+			if ("DONE".equalsIgnoreCase(childToUpdate.getStatus())
+					|| "COMPLETE".equalsIgnoreCase(childToUpdate.getStatus())) {
+				updatingChild.add(childToUpdate);
+			}
+		}
+		// If all children can be updated
+		if (childrenTasks.size() == updatingChild.size()) {
+			updateFamily(childrenTasks);
+			return true;
+		}
+
+		return false;
+	}
 
 
 

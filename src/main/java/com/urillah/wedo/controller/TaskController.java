@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.urillah.wedo.model.Task;
 import com.urillah.wedo.repository.TaskRepository;
+import com.urillah.wedo.service.TaskService;
 
 @RestController
 @RequestMapping("/tasks")
@@ -25,6 +26,9 @@ class TaskController {
 
 	@Autowired
 	private TaskRepository taskRepositoryObj;
+	
+	@Autowired
+	private TaskService taskServiceObj;
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -41,21 +45,28 @@ class TaskController {
 //		return taskRepositoryObj.findById(taskId);
 //	}
 
+	@PutMapping(value = "/update-details")
+	public Task updateDetails(@RequestBody Task taskDto) {
+		Task taskObj = new Task();
+		try {
+			taskObj = modelMapper.map(taskDto, Task.class);
+			taskObj.setName(taskDto.getName()); 
+			taskObj.setDescription(taskDto.getDescription()); 
+			taskRepositoryObj.save(taskObj);
+			return taskObj;
+		} catch (Exception e) {
+			System.out.println("Update failed {}" + taskDto);
+			return taskObj;
+		}
+	}
+	
 	@PostMapping(value = "/create")
 	public Task create(@RequestBody Task taskDto) {
 		Task taskObj = new Task();
-
 		try {
 			taskObj = modelMapper.map(taskDto, Task.class);
+			taskObj.setStatus("PENDING"); //All start from pendinng
 			taskRepositoryObj.save(taskObj);
-
-			// //Model mapping failed - workaround
-			// if(taskObj.getName() == null && taskDto.getName() != null){
-			// taskObj.setName(taskDto.getName());
-			// System.out.println("and now here in mapping fail" + taskDto.getTaskid());
-			// taskRepositoryObj.save(taskObj);
-			// }
-
 			return taskObj;
 		} catch (Exception e) {
 			System.out.println("Creation failed {}" + taskDto);
@@ -65,11 +76,30 @@ class TaskController {
 	}
 
 	@PutMapping(value = "/update-status")
-	public ResponseEntity<Task> udpateTaskStatus(@RequestBody Task taskDto) {
+	public ResponseEntity<Task> udpateTaskStatus(@RequestBody Task taskDto) throws Exception {
 		Task taskObj = new Task();
 
 		if (taskRepositoryObj.findById(taskDto.getTaskid()).isPresent()) {
-			taskObj.setStatus(taskDto.getStatus());
+			
+			//STATUS is incremental, can only go upwards.
+			switch(taskDto.getStatus()) {
+			case "PENDING":
+				taskObj.setStatus("DONE");
+				break;
+			case "DONE":
+				if(!taskServiceObj.hasChild(taskDto.getTaskid())) {
+					taskObj.setStatus("COMPLETE");
+				}
+				
+				List<Task> childrenTasks =  taskServiceObj.getChilds(taskDto.getTaskid());
+				if(taskServiceObj.validateFamilyUpdate(childrenTasks)) {
+					taskObj.setStatus("COMPLETE");
+				}
+				System.out.println("STATUS SHALL REMAIN DONE UNTIL CHILDREN TASKS ARE COMPLETED");
+				break;
+			default:
+				throw new Exception("INVALID STATUS STATE");
+			}
 			taskRepositoryObj.save(taskObj);
 			return new ResponseEntity<>(taskObj, HttpStatus.OK);
 		}
@@ -92,7 +122,6 @@ class TaskController {
 		}
 
 		return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
-
 	}
 
 	@DeleteMapping(value = "/clear")
