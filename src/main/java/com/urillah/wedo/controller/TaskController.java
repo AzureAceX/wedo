@@ -33,7 +33,6 @@ class TaskController {
 	public List<Task> getAll() {
 		List<Task> tasks = new ArrayList<>();
 		taskRepositoryObj.findAll().forEach(tasks::add);
-		// System.out.println("we here");
 		return tasks;
 	}
 
@@ -42,33 +41,19 @@ class TaskController {
 //		return taskRepositoryObj.findById(taskId);
 //	}
 
-	// @PostMapping(value = "/create")
-	// public ResponseEntity<Task> create(@RequestBody Task taskDto) {
-	// 	System.out.println("and now here");
-	// 	System.out.println("and now here" + taskDto.getTaskid());
-	// 	try {
-	// 		Task taskObj = modelMapper.map(taskDto, Task.class);
-	// 		taskRepositoryObj.save(taskObj);
-	// 		return new ResponseEntity<>(taskObj, HttpStatus.CREATED);
-	// 	} catch (Exception e) {
-	// 		return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
-	// 	}
-	// }
-
 	@PostMapping(value = "/create")
 	public Task create(@RequestBody Task taskDto) {
 		Task taskObj = new Task();
 
 		try {
 			taskObj = modelMapper.map(taskDto, Task.class);
-			// System.out.println("and now here");
 			taskRepositoryObj.save(taskObj);
 
 			// //Model mapping failed - workaround
 			// if(taskObj.getName() == null && taskDto.getName() != null){
-			// 	taskObj.setName(taskDto.getName());
-			// 	System.out.println("and now here in mapping fail" + taskDto.getTaskid());
-			// 	taskRepositoryObj.save(taskObj);
+			// taskObj.setName(taskDto.getName());
+			// System.out.println("and now here in mapping fail" + taskDto.getTaskid());
+			// taskRepositoryObj.save(taskObj);
 			// }
 
 			return taskObj;
@@ -79,37 +64,48 @@ class TaskController {
 
 	}
 
-    @PutMapping(value = "/update-status")
-    public ResponseEntity<Task> udpateTaskStatus(@RequestBody Task taskDto) {
-    	Task taskObj = new Task();
+	@PutMapping(value = "/update-status")
+	public ResponseEntity<Task> udpateTaskStatus(@RequestBody Task taskDto) {
+		Task taskObj = new Task();
 
-		if(taskRepositoryObj.findById(taskDto.getTaskid()).isPresent()) {
+		if (taskRepositoryObj.findById(taskDto.getTaskid()).isPresent()) {
 			taskObj.setStatus(taskDto.getStatus());
 			taskRepositoryObj.save(taskObj);
 			return new ResponseEntity<>(taskObj, HttpStatus.OK);
 		}
 
 		return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
-    }
+	}
 
-		@PutMapping(value = "/update-bulk")
-		public ResponseEntity<Task> bulkUpdate(List<Task> taskList) {
-			Task taskObj;
+	@PutMapping(value = "/update-bulk")
+	public ResponseEntity<Task> bulkUpdate(List<Task> taskList) {
+		Task taskObj;
 
-			for(Task task : taskList){
-				if(taskRepositoryObj.findById(task.getTaskid()).isPresent()) {
+		for (Task task : taskList) {
+			if (taskRepositoryObj.findById(task.getTaskid()).isPresent()) {
 
-					taskObj = taskRepositoryObj.findById(task.getTaskid()).get();
-					taskObj.setStatus(task.getStatus());
-					taskRepositoryObj.save(taskObj);
-					return new ResponseEntity<>(taskObj, HttpStatus.OK);
-				}
+				taskObj = taskRepositoryObj.findById(task.getTaskid()).get();
+				taskObj.setStatus(task.getStatus());
+				taskRepositoryObj.save(taskObj);
+				return new ResponseEntity<>(taskObj, HttpStatus.OK);
 			}
+		}
 
 		return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
 
-		}
+	}
 
+	@DeleteMapping(value = "/clear")
+	public ResponseEntity<HttpStatus> clearTasks() {
+		try {
+			List<Task> tasks = new ArrayList<>();
+			taskRepositoryObj.findAll().forEach(tasks::add);
+			taskRepositoryObj.deleteAll(tasks);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+		}
+	}
 
 //	@DeleteMapping(value = "/{taskid}")
 //	public ResponseEntity<HttpStatus> delete(@PathVariable("taskid") Long taskId) {
@@ -121,6 +117,7 @@ class TaskController {
 //		}
 //	}
 
+	
 //	@GetMapping(value = "/{taskname}")
 //	public Task findByTaskName(@PathVariable("name") String taskName) {
 //		return taskRepositoryObj.findByName(taskName);
