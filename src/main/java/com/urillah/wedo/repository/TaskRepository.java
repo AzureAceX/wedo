@@ -20,7 +20,7 @@ public interface TaskRepository extends CrudRepository<Task, Integer>{
 //	List<Task> findByParentTask(Integer parentTask);
 //
 
-	// List<Task> findByParenttask(Integer parentTask);
+	List<Task> findByParenttask(Integer parentTask);
 
 
 }

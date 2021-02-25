@@ -69,8 +69,9 @@ class TaskController {
 
 		@PutMapping(value = "/update-bulk")
 		public ResponseEntity<Task> bulkUpdate(List<Task> taskList) {
+			Task taskObj;
 
-			for(Task task : tasklist){
+			for(Task task : taskList){
 				if(taskRepositoryObj.findById(task.getTaskid()).isPresent()) {
 
 					Task taskObj = taskRepositoryObj.findById(task.getTaskid()).get();
