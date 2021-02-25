@@ -74,7 +74,7 @@ class TaskController {
 			for(Task task : taskList){
 				if(taskRepositoryObj.findById(task.getTaskid()).isPresent()) {
 
-					Task taskObj = taskRepositoryObj.findById(task.getTaskid()).get();
+					taskObj = taskRepositoryObj.findById(task.getTaskid()).get();
 					taskObj.setStatus(taskDto.getStatus());
 					taskRepositoryObj.save(taskObj);
 					return new ResponseEntity<>(taskObj, HttpStatus.OK);
