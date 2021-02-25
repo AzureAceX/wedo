@@ -23,17 +23,20 @@ var app = angular.module('myApp', ['ngRoute']);
 app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider
-      .when('/', {
-      // templateUrl: ".html",
-      template : "<h1>Test Route</h1><p>If you cannot see this well gg.</p>"
-      })
+      // .when('/', {
+      // // templateUrl: ".html",
+      // template : "<h1>Test Route</h1><p>If you cannot see this well...</p>"
+      // })
       .when('/task', {
-        templateUrl: "./tasks.html",
+        templateUrl: "tasks.html",
+      })
+      .when('/altTask', {
+        templateUrl: "altTask.html",
       })
       .when('/test', {
-        template : "<h1>Test Route</h1><p>If you cannot see this well gg.</p>"
+        template : "<h1>Test Route</h1><p>If you cannot see this then you've seen it.</p>"
       })
-      // .otherwise({
-      //   redirectTo: '/'
-      // });
+      .otherwise({
+        redirectTo: '/task'
+      });
   }]);
