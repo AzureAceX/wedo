@@ -42,15 +42,31 @@ class TaskController {
 //		return taskRepositoryObj.findById(taskId);
 //	}
 
+	// @PostMapping(value = "/create")
+	// public ResponseEntity<Task> create(@RequestBody Task taskDto) {
+	// 	System.out.println("and now here");
+	// 	System.out.println("and now here" + taskDto.getTaskid());
+	// 	try {
+	// 		Task taskObj = modelMapper.map(taskDto, Task.class);
+	// 		taskRepositoryObj.save(taskObj);
+	// 		return new ResponseEntity<>(taskObj, HttpStatus.CREATED);
+	// 	} catch (Exception e) {
+	// 		return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+	// 	}
+	// }
+
 	@PostMapping(value = "/create")
-	public ResponseEntity<Task> create(@RequestBody Task taskDto) {
+	public Task create(@RequestBody Task taskDto) {
+		Task taskObj;
 		System.out.println("and now here");
+		System.out.println("and now here" + taskDto.getTaskid());
 		try {
-			Task taskObj = modelMapper.map(taskDto, Task.class);
+			taskObj = modelMapper.map(taskDto, Task.class);
 			taskRepositoryObj.save(taskObj);
-			return new ResponseEntity<>(taskObj, HttpStatus.CREATED);
+			return taskObj;
 		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+			System.out.println("Creation failed {}" + taskDto));
+			return taskObj;
 		}
 	}
 

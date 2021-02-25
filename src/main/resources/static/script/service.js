@@ -6,8 +6,7 @@ app.factory("WedoSerivce", function ($http) {
       method: "GET",
       // url: "http://localhost:8761/tasks/list",
       url: "https://azureace-wedo.herokuapp.com/tasks/list",
-    })
-      .success(function (data, status, headers, config) {
+    }).success(function (data, status, headers, config) {
         cb(null, data);
       })
       .error(function (data, status, headers, config) {

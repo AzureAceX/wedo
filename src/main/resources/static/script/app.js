@@ -17,7 +17,7 @@ app.config(['$routeProvider', '$locationProvider',
       .when('/tasks', {
         templateUrl: "tasks.html",
       })
-      .when('/tasks/alt', {
+      .when('/alt', {
         templateUrl: "altListing.html",
       })
       .when('/test', {
