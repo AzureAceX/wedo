@@ -65,7 +65,7 @@ class TaskController {
 			taskRepositoryObj.save(taskObj);
 			return taskObj;
 		} catch (Exception e) {
-			System.out.println("Creation failed {}" + taskDto));
+			System.out.println("Creation failed {}" + taskDto);
 			return taskObj;
 		}
 	}
