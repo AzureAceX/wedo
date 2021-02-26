@@ -1,4 +1,4 @@
-app.factory("WedoSerivce", function ($http) {
+app.factory("WedoSerivce", function ($http, $scope) {
 
   var listTasks = function (cb) {
     $http({

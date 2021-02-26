@@ -31,3 +31,24 @@ app.config(['$routeProvider', '$locationProvider',
         redirectTo: '/tasks'
       });
   }]);
+
+  app.filter('statusFormatter', function(task) {
+    var status = task.status;
+    return function(status) {
+      var result = "";
+      switch(status){
+        case 0:
+          result = "PENDING"
+          break;
+        case 1:
+          result = "DONE"
+          break;
+        case 2:
+          result = "COMPLETE"
+          break;
+          default:
+            result = "UNKNWON"
+      }
+      return result;
+    };
+  });
