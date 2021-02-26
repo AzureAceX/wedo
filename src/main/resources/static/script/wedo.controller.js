@@ -6,7 +6,6 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
     $scope.taskList = [];
     $scope.validTask = false;
     $scope.taskCount;
-    // $scope.filterStatus = statusFormatter($scope.task.status);
 
     //preference on loading on app run
     WedoSerivce.listTasks(function (err, data) {
@@ -96,36 +95,6 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
 
        return $scope.validTask;
      }
-
-     // $scope.statusFilter = function(task)
-     // {
-     //   if(task.status == 0)
-     //    return "PENDING";
-     //
-     //    return "DONE";
-     // };
-
-// app.filter('statusFormatter', function(task) {
-//   var status = task.status;
-//   return function(status) {
-//     var result = "";
-//     switch(status){
-//       case 0:
-//         result = "PENDING"
-//         break;
-//       case 1:
-//         result = "DONE"
-//         break;
-//       case 2:
-//         result = "COMPLETE"
-//         break;
-//         default:
-//           result = "UNKNWON"
-//     }
-//     return result;
-//   };
-// });
-
 
 });
 

@@ -1,17 +1,5 @@
 app.factory("WedoSerivce", function ($http) {
 
-  // var listTasks = function (cb) {
-  //   $http({
-  //     method: "GET",
-  //     // url: "http://localhost:8761/tasks/list",
-  //     url: "https://azureace-wedo.herokuapp.com/tasks/list",
-  //   }).then(function success(response) {
-  //
-  //   }, function error(response) {
-  //     cb(response.data);
-  //   });
-  // };
-
   var listTasks = function (cb) {
     $http({
       method: "GET",
