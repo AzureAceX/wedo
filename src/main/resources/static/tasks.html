@@ -214,23 +214,18 @@
 				{id:1, name:"A A", age:"24",
 gender:"male", height:1, col:"red"},
 				{id:2, name:"B B", age:"48",
-gender:"female", height:2, col:"blue"},
+gender:"female", height:2, col:"blue"},]
 
-var table = new
-Tabulator("#example-table", {
-data:tableData,
-columns:[
-{title:"Name",
-field:"name"},
-{title:"Age", field:"age"},
-{title:"Gender",
-field:"gender"},
-{title:"Height",
-field:"height"},
-{title:"Favourite Color",
-field:"col"},
-],
-});
+var table = new Tabulator("#example-table", {
+  data:tableData,
+  columns:
+  [ {title:"Name", field:"name"},
+    {title:"Age", field:"age"},
+    {title:"Gender", field:"gender"}, 
+    {title:"Height",field:"height"}, 
+    {title:"Favourite Color",field:"col"},
+  ],
+  });
 
 
 </script>

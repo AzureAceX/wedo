@@ -8,10 +8,6 @@ app.config(['$routeProvider', '$locationProvider',
     }
 
     $routeProvider
-      // .when('/', {
-      // // templateUrl: ".html",
-      // template : "<h1>Test Route</h1><p>If you cannot see this well...</p>"
-      // })
       .when('/tasks', {
         templateUrl: "tasks.html",
       })

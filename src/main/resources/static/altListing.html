@@ -12,12 +12,11 @@
 
 </div>
 
-<div id="tabulator-main"></div>
-
-
 <p ng-repeat="task in taskList">{{task.name}}</p>
 
 <p>{{taskCount}}</p>
+
+<div id="tabulator-main"></div>
 
 <script>
 
@@ -60,6 +59,8 @@ var table = new Tabulator("#tabulator-main", {
   },
 });
 
+table.redraw(true);
+
 //select row on "select" button click
 document.getElementById("select-row").addEventListener("click", function(){
   table.selectRow(1);
@@ -79,5 +80,7 @@ document.getElementById("select-all").addEventListener("click", function(){
 document.getElementById("deselect-all").addEventListener("click", function(){
   table.deselectRow();
 });
+
+
 
 </script>
