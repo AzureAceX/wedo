@@ -45,18 +45,18 @@ app.factory("WedoSerivce", function ($http) {
 
 
 //gett one
-  //   var  = function (param, param, cb) {
-  //   $http({
-  //     method: "GET",
-  //     url: "http://localhost:8761/  /" +   + '/' +  ,
-  //   })
-  //     .success(function (data, status, headers, config) {
-  //       cb(null, data);
-  //     })
-  //     .error(function (data, status, headers, config) {
-  //       cb(data);
-  //     });
-  // };
+    var getTask = function (param, cb) {
+    $http({
+      method: "GET",
+      url: "https://azureace-wedo.herokuapp.com/tasks/get/ " + param,
+    })
+      .success(function (data, status, headers, config) {
+        cb(null, data);
+      })
+      .error(function (data, status, headers, config) {
+        cb(data);
+      });
+  };
 
   var createTask = function (data,cb) {
     console.log(data);
@@ -77,6 +77,7 @@ app.factory("WedoSerivce", function ($http) {
 
   return {
     listTasks: listTasks,
+    getTask: getTask,
     createTask: createTask,
     updateTaskStatus: updateTaskStatus,
     updateTaskDetails: updateTaskDetails,

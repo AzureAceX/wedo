@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 
-
+import com.urillah.wedo.dto.TaskDTO;
 import com.urillah.wedo.model.Task;
 import com.urillah.wedo.repository.TaskRepository;
 import com.urillah.wedo.service.TaskService;
@@ -51,24 +51,21 @@ class TaskController {
 //	}
 
 	@PutMapping(value = "/update-details/{taskid}")
-	public Task updateDetails(@PathVariable("taskid") String taskid) {
+	public Task updateDetails(@PathVariable("taskid") Integer taskid, @RequestBody TaskDTO taskDTO) {
 		Task taskObj = new Task();
 
 		System.out.println("Updating" + taskObj);
 
-		if(taskRepositoryObj.findById(taskid).isPresent())
-			taskObjtaskRepositoryObj.findById(taskid).get();
-
-		try {
-			// taskObj = modelMapper.map(taskDto, Task.class);
-			taskObj.setName(taskDto.getName());
-			taskObj.setDescription(taskDto.getDescription());
+		if(taskRepositoryObj.findById(taskid).isPresent()) {
+			taskObj = taskRepositoryObj.findById(taskid).get();
+			taskObj.setName(taskDTO.getName());
+			taskObj.setDescription(taskDTO.getDescription());
 			taskRepositoryObj.save(taskObj);
 			return taskObj;
-		} catch (Exception e) {
-			System.out.println("Update failed {}" + taskObj);
-			return taskObj;
+		}else {
+			System.out.println("Task Not Found!");
 		}
+		return null;
 	}
 
 	@PostMapping(value = "/create")
@@ -77,7 +74,7 @@ class TaskController {
 		try {
 			taskObj = modelMapper.map(taskDto, Task.class);
 			taskObj.setStatus(Status.PENDING.ordinal()); //All start from pending
-			taskObj.setPriority(1); //All start from pendinng
+			taskObj.setPriority(1); //All start from pending
 			taskRepositoryObj.save(taskObj);
 			System.out.println("saving {}" + taskObj);
 			return taskObj;
