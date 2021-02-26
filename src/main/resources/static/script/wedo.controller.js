@@ -56,7 +56,13 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
         //findCheckedItems - checkboxes flagged as true
         for(var x = 0; x<$scope.checkedItem.length; x++){
           if($scope.checkedItem[x] == true)
-            $scope.taskToUpdate.push(scope.checkedItem[x]);
+            $scope.taskToUpdate.push($scope.checkedItem[x]);
+        }
+
+        if($scope.taskToUpdate.length == 0){
+          toast.warning("Make A Selection To Proceed");
+          $scope.updateTask = {};
+          return;
         }
 
         if($scope.taskToUpdate.length > 1){
