@@ -28,10 +28,10 @@ app.factory("WedoSerivce", function ($http) {
       });
   };
 
-  var updateTaskDetails = function (data, cb) {
+  var updateTaskDetails = function (param, data, cb) {
     $http({
       method: "PUT",
-      url: "https://azureace-wedo.herokuapp.com/tasks/update-status",
+      url: "https://azureace-wedo.herokuapp.com/tasks/update-status " + param,
       data: data,
     })
       .success(function (data, status, headers, config) {

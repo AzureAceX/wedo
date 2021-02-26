@@ -50,19 +50,32 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
     };
 
       $scope.updateTaskDetails = function() {
-
+        $scope.taskToUpdate = [];
         console.log($scope.checkedItem);
-        // WedoSerivce.updateTaskDetails($scope.updateTask, function (err, data){
-        //     if (!err) {
-        //         $scope.tasks = data;
-        //         console.log($scope.tasks);
-        //    }
-        // })
-        // $scope.listTasks();
+
+        //findCheckedItems - checkboxes flagged as true
+        for(int x = 0; x<$scope.checkedItem.length; x++){
+          if(scope.checkedItem[x] == true)
+            $scope.taskToUpdate.push(scope.checkedItem[x]);
+        }
+
+        if($scope.taskToUpdate.length > 1){
+          toast.error("Sorry, You Can Only Update Task Details Individually At This Point In Time");
+          $scope.taskToUpdate = [];
+          return;
+        }
+
+        WedoSerivce.updateTaskDetails($scope.taskToUpdate[0], function (err, data){
+            if (!err) {
+                $scope.tasks = data;
+                console.log($scope.tasks);
+           }
+        })
+        $scope.listTasks();
       };
 
-      $scope.updateTaskStatus = function (index) {
 
+      $scope.updateTaskStatus = function (index) {
           var name = $scope.taskList[index].Name;
           $window.alert("Name: " + name );
 

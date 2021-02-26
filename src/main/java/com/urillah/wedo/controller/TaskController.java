@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 import com.urillah.wedo.model.Task;
 import com.urillah.wedo.repository.TaskRepository;
@@ -28,7 +30,7 @@ class TaskController {
 
 	@Autowired
 	private TaskRepository taskRepositoryObj;
-	
+
 	@Autowired
 	private TaskService taskServiceObj;
 
@@ -48,13 +50,19 @@ class TaskController {
 //		return taskRepositoryObj.findById(taskId);
 //	}
 
-	@PutMapping(value = "/update-details")
-	public Task updateDetails(@RequestBody Task taskDto) {
+	@PutMapping(value = "/update-details/{taskid}")
+	public Task updateDetails(@PathVariable("taskid") String taskid) {
 		Task taskObj = new Task();
+
+		System.out.println("Updating" + taskDto);
+
+		if(taskRepositoryObj.findById(taskid).isPresent())
+			taskObjtaskRepositoryObj.findById(taskid).get();
+
 		try {
 			taskObj = modelMapper.map(taskDto, Task.class);
-			taskObj.setName(taskDto.getName()); 
-			taskObj.setDescription(taskDto.getDescription()); 
+			taskObj.setName(taskDto.getName());
+			taskObj.setDescription(taskDto.getDescription());
 			taskRepositoryObj.save(taskObj);
 			return taskObj;
 		} catch (Exception e) {
@@ -62,7 +70,7 @@ class TaskController {
 			return taskObj;
 		}
 	}
-	
+
 	@PostMapping(value = "/create")
 	public Task create(@RequestBody Task taskDto) {
 		Task taskObj = new Task();
@@ -85,7 +93,7 @@ class TaskController {
 		Task taskObj = new Task();
 
 		if (taskRepositoryObj.findById(taskDto.getTaskid()).isPresent()) {
-			
+
 			//STATUS is incremental, can only go upwards.
 			switch(taskDto.getStatus()) {
 			case 0:
@@ -95,7 +103,7 @@ class TaskController {
 				if(!taskServiceObj.hasChild(taskDto.getTaskid())) {
 					taskObj.setStatus(Status.COMPLETE.ordinal());
 				}
-				
+
 				List<Task> childrenTasks =  taskServiceObj.getChilds(taskDto.getTaskid());
 				if(taskServiceObj.validateFamilyUpdate(childrenTasks)) {
 					taskObj.setStatus(Status.COMPLETE.ordinal());
@@ -151,7 +159,7 @@ class TaskController {
 //		}
 //	}
 
-	
+
 //	@GetMapping(value = "/{taskname}")
 //	public Task findByTaskName(@PathVariable("name") String taskName) {
 //		return taskRepositoryObj.findByName(taskName);
