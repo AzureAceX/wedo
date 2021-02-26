@@ -7,10 +7,10 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
     $scope.validTask = false;
     $scope.taskCount;
 
+    //preference on loading on app run
     WedoSerivce.listTasks(function (err, data) {
       if (!err) {
         toastr.info("Loading Tasks");
-        console.log(data);
         $scope.taskList = data;
         $scope.taskCount = data.length;
       }
@@ -21,7 +21,6 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
       WedoSerivce.listTasks(function (err, data) {
         if (!err) {
           toastr.info("Loading Tasks");
-          console.log(data);
           $scope.taskList = data;
           $scope.taskCount = data.length;
         }
