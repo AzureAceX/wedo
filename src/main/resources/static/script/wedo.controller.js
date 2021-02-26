@@ -1,4 +1,4 @@
-app.controller("WedoController",function ($scope, WedoSerivce, $location, $window) {
+app.controller("WedoController",function ($scope, WedoSerivce, $location, $window, statusFormatter) {
 
     //Create task
     $scope.newTask = {};
