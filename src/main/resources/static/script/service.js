@@ -1,18 +1,30 @@
 app.factory("WedoSerivce", function ($http) {
 
-
   var listTasks = function (cb) {
     $http({
       method: "GET",
       // url: "http://localhost:8761/tasks/list",
       url: "https://azureace-wedo.herokuapp.com/tasks/list",
-    }).success(function (data, status, headers, config) {
-        cb(null, data);
-      })
-      .error(function (data, status, headers, config) {
-        cb(data);
-      });
+    }).then(function success(response) {
+      $scope.taskList = response.data;
+    }, function error(response) {
+      cb(response.data);
+    });
   };
+
+  // var listTasks = function (cb) {
+  //   $http({
+  //     method: "GET",
+  //     // url: "http://localhost:8761/tasks/list",
+  //     url: "https://azureace-wedo.herokuapp.com/tasks/list",
+  //   })
+  //   .success(function (data, status, headers, config) {
+  //       cb(null, data);
+  //     })
+  //     .error(function (data, status, headers, config) {
+  //       cb(data);
+  //     });
+  // };
 
   var updateTaskStatus = function (data, cb) {
     $http({

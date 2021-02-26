@@ -95,8 +95,28 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
        return $scope.validTask;
      }
 
-  }
-);
+app.filter('statusFormatter', function() {
+  return function(task.status) {
+    var result = "";
+    switch(task.status){
+      case 0:
+        result = "PENDING"
+        break;
+      case 1:
+        result = "DONE"
+        break;
+      case 2:
+        result = "COMPLETE"
+        break;
+        default:
+          "UNKNWON"
+    }
+    return result;
+  };
+});
+
+
+});
 
 
 
