@@ -54,7 +54,7 @@ class TaskController {
 	public Task updateDetails(@PathVariable("taskid") String taskid) {
 		Task taskObj = new Task();
 
-		System.out.println("Updating" + taskDto);
+		System.out.println("Updating" + taskObj);
 
 		if(taskRepositoryObj.findById(taskid).isPresent())
 			taskObjtaskRepositoryObj.findById(taskid).get();
@@ -66,7 +66,7 @@ class TaskController {
 			taskRepositoryObj.save(taskObj);
 			return taskObj;
 		} catch (Exception e) {
-			System.out.println("Update failed {}" + taskDto);
+			System.out.println("Update failed {}" + taskObj);
 			return taskObj;
 		}
 	}
