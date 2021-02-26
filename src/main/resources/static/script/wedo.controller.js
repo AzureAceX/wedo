@@ -1,4 +1,4 @@
-app.controller("WedoController",function ($scope, WedoSerivce, $location, $window, statusFormatter) {
+app.controller("WedoController", ['$scope', 'statusFormatter', function ($scope, WedoSerivce, $location, $window, statusFormatter) {
 
     //Create task
     $scope.newTask = {};
@@ -124,7 +124,7 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
 // });
 
 
-});
+}]);
 
 
 
