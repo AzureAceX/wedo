@@ -95,10 +95,16 @@ app.controller("WedoController",function ($scope, WedoSerivce, $location, $windo
        return $scope.validTask;
      }
 
-app.filter('statusFormatter', function() {
-  return function(task.status) {
+     // $scope.statusFilter = function(task)
+     // {
+     //     return (item.type !== 'foo');
+     // };
+
+app.filter('statusFormatter', function(task) {
+  var status = task.status;
+  return function(status) {
     var result = "";
-    switch(task.status){
+    switch(status){
       case 0:
         result = "PENDING"
         break;
@@ -109,7 +115,7 @@ app.filter('statusFormatter', function() {
         result = "COMPLETE"
         break;
         default:
-          "UNKNWON"
+          result = "UNKNWON"
     }
     return result;
   };
