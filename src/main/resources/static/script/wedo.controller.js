@@ -60,13 +60,13 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
         }
 
         if($scope.taskToUpdate.length == 0){
-          toast.warning("Make A Selection To Proceed");
+          toastr.warning("Make A Selection To Proceed");
           $scope.updateTask = {};
           return;
         }
 
         if($scope.taskToUpdate.length > 1){
-          toast.error("Sorry, You Can Only Update Task Details Individually At This Point In Time");
+          toastr.error("Sorry, You Can Only Update Task Details Individually At This Point In Time");
           $scope.taskToUpdate = [];
           return;
         }
