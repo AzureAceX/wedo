@@ -60,7 +60,7 @@ class TaskController {
 			taskObjtaskRepositoryObj.findById(taskid).get();
 
 		try {
-			taskObj = modelMapper.map(taskDto, Task.class);
+			// taskObj = modelMapper.map(taskDto, Task.class);
 			taskObj.setName(taskDto.getName());
 			taskObj.setDescription(taskDto.getDescription());
 			taskRepositoryObj.save(taskObj);
