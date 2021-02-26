@@ -1,4 +1,4 @@
-app.controller("WedoController", ['$scope', 'statusFormatter', function ($scope, WedoSerivce, $location, $window, statusFormatter) {
+app.controller("WedoController", ['$scope', function ($scope, WedoSerivce, $location, $window) {
 
     //Create task
     $scope.newTask = {};
@@ -6,6 +6,7 @@ app.controller("WedoController", ['$scope', 'statusFormatter', function ($scope,
     $scope.taskList = [];
     $scope.validTask = false;
     $scope.taskCount;
+    // $scope.filterStatus = statusFormatter($scope.task.status);
 
     //preference on loading on app run
     WedoSerivce.listTasks(function (err, data) {
@@ -48,13 +49,15 @@ app.controller("WedoController", ['$scope', 'statusFormatter', function ($scope,
     };
 
       $scope.updateTaskDetails = function() {
-        WedoSerivce.updateTaskDetails($scope.updateTask, function (err, data){
-            if (!err) {
-                $scope.tasks = data;
-                console.log($scope.tasks);
-           }
-        })
-        $scope.listTasks();
+
+        console.log($scope.checkedItem);
+        // WedoSerivce.updateTaskDetails($scope.updateTask, function (err, data){
+        //     if (!err) {
+        //         $scope.tasks = data;
+        //         console.log($scope.tasks);
+        //    }
+        // })
+        // $scope.listTasks();
       };
 
       $scope.updateTaskStatus = function (index) {

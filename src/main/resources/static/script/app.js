@@ -30,23 +30,23 @@ app.config(['$routeProvider', '$locationProvider',
       });
   }]);
 
-  app.filter('statusFormatter', function(task) {
-    var status = task.status;
-    return function(status) {
-      var result = "";
-      switch(status){
-        case 0:
-          result = "PENDING"
-          break;
-        case 1:
-          result = "DONE"
-          break;
-        case 2:
-          result = "COMPLETE"
-          break;
-          default:
-            result = "UNKNWON"
-      }
-      return result;
-    };
-  });
+  // app.filter('statusFormatter', function() {
+  //   return function(task) {
+  //     var status = task.status;
+  //     var result = "";
+  //     switch(status){
+  //       case 0:
+  //         result = "PENDING"
+  //         break;
+  //       case 1:
+  //         result = "DONE"
+  //         break;
+  //       case 2:
+  //         result = "COMPLETE"
+  //         break;
+  //         default:
+  //           result = "UNKNWON"
+  //     }
+  //     return result;
+  //   };
+  // });
