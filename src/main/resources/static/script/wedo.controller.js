@@ -6,6 +6,8 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
     $scope.taskList = [];
     $scope.validTask = false;
     $scope.taskCount;
+    $scope.item;
+    $scope.checkedItem;
 
     //preference on loading on app run
     WedoSerivce.listTasks(function (err, data) {
