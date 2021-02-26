@@ -14,10 +14,10 @@ app.factory("WedoSerivce", function ($http) {
       });
   };
 
-  var updateTaskStatus = function (data, cb) {
+  var updateTaskStatus = function (taskid, data, cb) {
     $http({
       method: "PUT",
-      url: "https://azureace-wedo.herokuapp.com/tasks/update-status",
+      url: "https://azureace-wedo.herokuapp.com/tasks/update-status/" + taskid,
       data: data,
     })
       .success(function (data, status, headers, config) {
@@ -44,7 +44,7 @@ app.factory("WedoSerivce", function ($http) {
 
 
 
-//gett one
+//get one
     var getTask = function (param, cb) {
     $http({
       method: "GET",

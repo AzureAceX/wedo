@@ -55,7 +55,7 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
 
         //findCheckedItems - checkboxes flagged as true
         for(var x = 0; x<$scope.checkedItem.length; x++){
-          if(scope.checkedItem[x] == true)
+          if($scope.checkedItem[x] == true)
             $scope.taskToUpdate.push(scope.checkedItem[x]);
         }
 
@@ -75,7 +75,7 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
       };
 
 
-      $scope.updateTaskStatus = function (taskid) {
+      $scope.updateTaskStatus = function () {
 
         console.log(taskid);
 
