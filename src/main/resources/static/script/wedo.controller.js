@@ -27,6 +27,9 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
         if (!err) {
           toastr.info("Loading Tasks");
           $scope.taskList = data;
+          $scope.selectedRow = data[0];
+          $scope.selectedRow.selected = true;
+          $scope.selectedRows.push($scope.selectedRow);
           $scope.taskCount = data.length;
         }
       });
@@ -176,12 +179,21 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
      }
 
      $scope.rowSelected = function(row){
+       var popped = false;
 
-      if($scope.selectedRow.selected){
-        $scope.selectedRow.selected = false;
+      //If the task exists, pop it by searching existing list, and splicing
+      for(var x = 0; x<$scope.selectedRows.length; x++){
+        if(x<$scope.selectedRows[x].taskid == row.taskid){
+          scope.selectedRows.splice([x],1);
+          popped = true;
+        }
       }
 
-       $scope.selectedRow = row;
+      //if we arent removing a selection
+      if(!popped){
+        $scope.selectedRow = row;
+        $scope.selectedRows.push(row);
+      }
 
       // // if(row.selected){
       // //   $scope.selectedRows.push(row);
@@ -197,7 +209,7 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
       // $scope.selectedRow = row;
       // $scope.selectedRows.push(row);
 
-      console.log(selectedRow);
+      console.log($scope.selectedRows);
     };
 
 });
