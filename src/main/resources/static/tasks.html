@@ -33,7 +33,7 @@
         <td>{{task.name}}</td>
         <td>{{task.description}}</td>
 				<!-- <td>{{task.status}}</td> -->
-        <td>{{task.status | statusFormatter}}</td>
+        <td>{{task.status | statusFormatter}} <p>{{task.status}}</p> </td>
         <td style="text-align: center;">
 					<div class="row">
 						<button type="button" class="btn btn-success pull-right float-right btn-sm rounded-1" data-toggle="modal" data-target="#updateModal">Update Details</button>

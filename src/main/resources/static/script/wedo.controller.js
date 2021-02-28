@@ -6,6 +6,7 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
     $scope.taskList = [];
     $scope.validTask = false;
     $scope.taskCount;
+
     $scope.item;
     $scope.checkedItem = [];
 
@@ -55,17 +56,22 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
 
         //findCheckedItems - checkboxes flagged as true
         for(var x = 0; x<$scope.checkedItem.length; x++){
-          if($scope.checkedItem[x] == true)
+          if($scope.checkedItem[x] == true){
             $scope.taskToUpdate.push($scope.checkedItem[x]);
+
+            var key = Object.keys($scope.checkedItem[x])[0];
+            $scope.directivesInfoObject[key] = $scope.checkedItem[x][key];
+
+            console.log("array key " + $scope.directivesInfoObject[key]);
+          }
+
         }
 
         if($scope.taskToUpdate.length == 0){
           toastr.warning("Make A Selection To Proceed");
           $scope.updateTask = {};
           return;
-        }
-
-        if($scope.taskToUpdate.length > 1){
+        }else if($scope.taskToUpdate.length > 1){
           toastr.error("Sorry, You Can Only Update Task Details Individually At This Point In Time");
           $scope.taskToUpdate = [];
           return;
