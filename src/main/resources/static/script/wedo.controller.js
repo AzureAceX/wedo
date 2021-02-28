@@ -99,17 +99,22 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
 
       $scope.updateTaskStatus = function () {
 
+        console.log($scope.selectedRows.length);
         if($scope.selectedRows.length == 0){
           toastr.warning("Make A Selection To Proceed");
           $scope.updateTask = {};
           return;
-        }else if($scope.selectedRows.length > 1){
+        }
+
+      
+        if($scope.selectedRows.length > 1){
           toastr.error("Sorry, You Can Only Update Task Details Individually At This Point In Time");
           $scope.selectedRow = {};
           return;
-        }else {
-          console.log($scope.selectedRows[0]);
         }
+
+          console.log($scope.selectedRows[0]);
+
 
         // $scope.targetTask;
         // $scope.checked = [];
