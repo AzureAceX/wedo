@@ -193,6 +193,7 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
       if(!popped){
         $scope.selectedRow = row;
         $scope.selectedRows.push(row);
+        popped = false;
       }
 
       // // if(row.selected){
