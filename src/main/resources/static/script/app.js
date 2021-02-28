@@ -10,7 +10,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       .when('/tasks', {
         templateUrl: "tasks.html",
       })
-      .when('/tasks2', {
+      .when('/ottask', {
         templateUrl: "taskoverdue.html",
       })
       .when('/tasks/:taskId', {
