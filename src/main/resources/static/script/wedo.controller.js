@@ -184,7 +184,7 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
       //If the task exists, pop it by searching existing list, and splicing
       for(var x = 0; x<$scope.selectedRows.length; x++){
         if(x<$scope.selectedRows[x].taskid == row.taskid){
-          scope.selectedRows.splice([x],1);
+          $scope.selectedRows.splice([x],1);
           popped = true;
         }
       }
