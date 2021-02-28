@@ -181,7 +181,7 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
       // }
       
       //clear prev
-      scope.selectedRows[0].selected = false;
+      $scope.selectedRows[0].selected = false;
       $scope.selectedRows = [];
 
       //add new
