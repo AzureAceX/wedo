@@ -9,6 +9,7 @@
 <div class="col-8 col-sm-8 col-md-8 d-flex p-2 justify-content-center mb-5">
       <a type="button" class="btn btn-info mr-2" href="/tasks">View Tasks</a>
       <a type="button" class="btn btn-info mr-2" href="/alt">Alternate</a>
+      <a type="button" class="btn btn-info mr-2" href="/tasks2">OT</a>
 
 </div>
 
@@ -59,7 +60,7 @@ var table = new Tabulator("#tabulator-main", {
   },
 });
 
-table.redraw(true);
+// table.redraw(true);
 
 //select row on "select" button click
 document.getElementById("select-row").addEventListener("click", function(){
