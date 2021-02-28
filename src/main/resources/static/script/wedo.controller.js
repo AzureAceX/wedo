@@ -21,7 +21,7 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
       }
     });
 
-    //List tasks - to run on app load
+    //List tasks -
     $scope.listTasks = function () {
       WedoSerivce.listTasks(function (err, data) {
         if (!err) {
@@ -100,16 +100,21 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
       $scope.updateTaskStatus = function () {
 
         console.log($scope.selectedRows.length);
+
         if($scope.selectedRows.length == 0){
           toastr.warning("Make A Selection To Proceed");
           $scope.updateTask = {};
           return;
         }
 
-      
         if($scope.selectedRows.length > 1){
           toastr.error("Sorry, You Can Only Update Task Details Individually At This Point In Time");
-          $scope.selectedRow = {};
+
+          //unset everything && empty selection list
+          for(var x = 0 ; x<$scope.selectedRows.length; x++){
+            $scope.selectedRows[x].selected = false;
+          }
+          $scope.selectedRows = [];
           return;
         }
 
@@ -131,11 +136,12 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
         //   return;
         // }
 
-        // WedoSerivce.getTask($scope.taskToUpdate[0], function (err, data){
-        //   if (!err) {
-        //     $scope.targetTask = data;
-        //  }
-        // })
+        WedoSerivce.getTask($scope.selectedRows[0], function (err, data){
+          if (!err) {
+            $scope.targetTask = data;
+            console.log(data);
+         }
+        })
         
         //   WedoSerivce.updateTaskStatus($scope.targetTask, function (err, data){
         //     if (!err) {
@@ -170,9 +176,19 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
      }
 
      $scope.rowSelected = function(row){
-      $scope.selectedRows.push(row);
+      // if(row.selected){
+      //   $scope.selectedRows.push(row);
+      // }
+      
+      //clear prev
+      scope.selectedRows[0].selected = false;
+      $scope.selectedRows = [];
+
+      //add new
       $scope.selectedRow = row;
-      console.log(row);
+      $scope.selectedRows.push(row);
+
+      console.log(selectedRows);
     };
 
 });
