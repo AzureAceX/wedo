@@ -65,7 +65,7 @@ class TaskController {
 		}else {
 			System.out.println("Task Not Found!");
 		}
-		return null;
+		return taskObj;
 	}
 
 	@PostMapping(value = "/create")

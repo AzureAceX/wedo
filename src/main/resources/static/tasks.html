@@ -2,7 +2,7 @@
 	<div class="col-8 col-sm-8 col-md-8 d-flex p-2 justify-content-center mb-5">
         <a type="button" class="btn btn-info mr-2" href="/tasks">View Tasks</a>
 				<a type="button" class="btn btn-info mr-2" href="/alt" aria-disabled="true">Alternate</a>
-        <a type="button" class="btn btn-info mr-2" href="/tasks2">OT</a>
+        <a type="button" class="btn btn-info mr-2" href="/ottask">OT</a>
 
 	</div>
 
@@ -32,8 +32,8 @@
         <td>{{task.taskid}}</td>
         <td>{{task.name}}</td>
         <td>{{task.description}}</td>
-				<td>{{task.status}}</td>
-        <!-- <td>{{task.status | statusFormatter}}</td> -->
+				<!-- <td>{{task.status}}</td> -->
+        <td>{{task.status | statusFormatter}}</td>
         <td style="text-align: center;">
 					<div class="row">
 						<button type="button" class="btn btn-success pull-right float-right btn-sm rounded-1" data-toggle="modal" data-target="#updateModal">Update Details</button>

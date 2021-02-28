@@ -71,7 +71,7 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
           return;
         }
 
-        WedoSerivce.updateTaskDetails($scope.taskToUpdate[0], function (err, data){
+        WedoSerivce.updateTaskDetails($scope.taskToUpdate[0].taskid, $scope.updateTask, function (err, data){
             if (!err) {
                 $scope.tasks = data;
                 console.log($scope.tasks);

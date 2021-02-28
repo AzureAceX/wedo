@@ -31,7 +31,7 @@ app.factory("WedoSerivce", function ($http) {
   var updateTaskDetails = function (param, data, cb) {
     $http({
       method: "PUT",
-      url: "https://azureace-wedo.herokuapp.com/tasks/update-status " + param,
+      url: "https://azureace-wedo.herokuapp.com/tasks/update-details/" + param,
       data: data,
     })
       .success(function (data, status, headers, config) {
