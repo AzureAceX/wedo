@@ -7,6 +7,7 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
     $scope.validTask = false;
     $scope.taskCount;
 
+    $scope.selectedRow;
     // $scope.item;
     $scope.checkedItem = [];
 
@@ -30,13 +31,6 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
       });
     };
 
-    //On page load
-    // $scope.listTasks();
-    $scope.rowSelected = function(row){
-      $scope.selectedRow = row;
-      console.log(row);
-    };
-
     $scope.createTask = function () {
       if($scope.validateTask()){
         WedoSerivce.createTask($scope.newTask, function (err, data) {
@@ -53,29 +47,35 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
     };
 
       $scope.updateTaskDetails = function() {
-        $scope.taskToUpdate = [];
-        console.log($scope.checkedItem);
+        // $scope.taskToUpdate = [];
+        // console.log($scope.checkedItem);
 
-        //findCheckedItems - checkboxes flagged as true
-        for(var x = 0; x<$scope.checkedItem.length; x++){
-          if($scope.checkedItem[x].isChecked == true){
-            $scope.taskToUpdate.push($scope.checkedItem[x]);
-          }
-        }
+        // //findCheckedItems - checkboxes flagged as true
+        // for(var x = 0; x<$scope.checkedItem.length; x++){
+        //   if($scope.checkedItem[x].isChecked == true){
+        //     $scope.taskToUpdate.push($scope.checkedItem[x]);
+        //   }
+        // }
 
-        console.log($scope.taskToUpdate);
+        // console.log($scope.taskToUpdate);
 
-        if($scope.taskToUpdate.length == 0){
+        // if($scope.taskToUpdate.length == 0){
+        //   toastr.warning("Make A Selection To Proceed");
+        //   $scope.updateTask = {};
+        //   return;
+        // }else if($scope.taskToUpdate.length > 1){
+        //   toastr.error("Sorry, You Can Only Update Task Details Individually At This Point In Time");
+        //   $scope.taskToUpdate = [];
+        //   return;
+        // }
+
+        if($scope.selectedRow.selected == false){
           toastr.warning("Make A Selection To Proceed");
           $scope.updateTask = {};
           return;
-        }else if($scope.taskToUpdate.length > 1){
-          toastr.error("Sorry, You Can Only Update Task Details Individually At This Point In Time");
-          $scope.taskToUpdate = [];
-          return;
         }
 
-        WedoSerivce.updateTaskDetails($scope.taskToUpdate[0].taskid, $scope.updateTask, function (err, data){
+        WedoSerivce.updateTaskDetails($scope.selectedRow.taskid, $scope.updateTask, function (err, data){
             if (!err) {
                 $scope.tasks = data;
                 console.log($scope.tasks);
@@ -87,7 +87,12 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
 
       $scope.updateTaskStatus = function () {
 
-        console.log(taskid);
+        if($scope.selectedRow.selected == false){
+          toastr.warning("Make A Selection To Proceed");
+          $scope.updateTask = {};
+          return;
+        }
+        console.log($scope.selectedRow);
 
         // $scope.targetTask;
         // $scope.checked = [];
@@ -141,6 +146,11 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
 
        return $scope.validTask;
      }
+
+     $scope.rowSelected = function(row){
+      $scope.selectedRow = row;
+      console.log(row);
+    };
 
 });
 
