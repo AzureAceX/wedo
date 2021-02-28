@@ -7,7 +7,7 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
     $scope.validTask = false;
     $scope.taskCount;
 
-    $scope.item;
+    // $scope.item;
     $scope.checkedItem = [];
 
     //preference on loading on app run
@@ -56,16 +56,12 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
 
         //findCheckedItems - checkboxes flagged as true
         for(var x = 0; x<$scope.checkedItem.length; x++){
-          if($scope.checkedItem[x] == true){
+          if($scope.checkedItem[x].isChecked == true){
             $scope.taskToUpdate.push($scope.checkedItem[x]);
-
-            var key = Object.keys($scope.checkedItem[x])[0];
-            $scope.directivesInfoObject[key] = $scope.checkedItem[x][key];
-
-            console.log("array key " + $scope.directivesInfoObject[key]);
           }
-
         }
+
+        console.log($scope.taskToUpdate);
 
         if($scope.taskToUpdate.length == 0){
           toastr.warning("Make A Selection To Proceed");

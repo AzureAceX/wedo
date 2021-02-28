@@ -31,7 +31,6 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   app.filter('statusFormatter', function() {
     return function(task) {
       var status = task.status;
-      console.log("preformater " + status);
       var result = "";
       switch(status){
         case 0:
