@@ -29,10 +29,11 @@
     <tbody>
       <tr ng-repeat="task in taskList">
 				<td><input type="checkbox" name="checkedItem" ng-model="checkedItem[task.taskid]"></td>
+        <td> <input type="checkbox" ng-checked="checkedItem.push(task.taskid)" ng-model="checkedItem[task.taskid]" ng-click="rowSelected(task)"></td>
         <td>{{task.taskid}}</td>
         <td>{{task.name}}</td>
         <td>{{task.description}}</td>
-				<!-- <td>{{task.status}}</td> -->
+				<td>{{task.status}}</td>
         <!-- <td>{{task.status | statusFormatter}} <p>{{task.status}}</p> </td> -->
         <td style="text-align: center;">
 					<div class="row">

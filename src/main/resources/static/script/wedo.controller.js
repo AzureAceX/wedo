@@ -33,7 +33,10 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
     //On page load
     // $scope.listTasks();
 
-
+    $scope.rowSelected = function(row)
+    {
+        console.log(row);
+    };
 
     $scope.createTask = function () {
       if($scope.validateTask()){
