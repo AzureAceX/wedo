@@ -8,6 +8,7 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
     $scope.taskCount;
 
     $scope.selectedRow;
+    $scope.selectedRows = [];
     // $scope.item;
     $scope.checkedItem = [];
 
@@ -69,30 +70,46 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
         //   return;
         // }
 
-        if($scope.selectedRow.selected == false){
+
+       if($scope.selectedRows.length == 0){
           toastr.warning("Make A Selection To Proceed");
           $scope.updateTask = {};
           return;
+        }else if($scope.selectedRows.length > 1){
+          toastr.error("Sorry, You Can Only Update Task Details Individually At This Point In Time");
+          $scope.selectedRow = {};
+          return;
         }
 
-        WedoSerivce.updateTaskDetails($scope.selectedRow.taskid, $scope.updateTask, function (err, data){
+        // if($scope.selectedRow.selected == false){
+        //   toastr.warning("Make A Selection To Proceed");
+        //   $scope.updateTask = {};
+        //   return;
+        // }
+
+        WedoSerivce.updateTaskDetails($scope.selectedRows[0].taskid, $scope.updateTask, function (err, data){
             if (!err) {
-                $scope.tasks = data;
-                console.log($scope.tasks);
+                // $scope.task = data;
+                console.log(data);
            }
-        })
+        })                                
         $scope.listTasks();
       };
 
 
       $scope.updateTaskStatus = function () {
 
-        if($scope.selectedRow.selected == false){
+        if($scope.selectedRows.length == 0){
           toastr.warning("Make A Selection To Proceed");
           $scope.updateTask = {};
           return;
+        }else if($scope.selectedRows.length > 1){
+          toastr.error("Sorry, You Can Only Update Task Details Individually At This Point In Time");
+          $scope.selectedRow = {};
+          return;
+        }else {
+          console.log($scope.selectedRows[0]);
         }
-        console.log($scope.selectedRow);
 
         // $scope.targetTask;
         // $scope.checked = [];
@@ -148,6 +165,7 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
      }
 
      $scope.rowSelected = function(row){
+      $scope.selectedRows.push(row);
       $scope.selectedRow = row;
       console.log(row);
     };
