@@ -34,16 +34,17 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       var result = "";
       switch(status){
         case 0:
-          result = "PENDING"
+          result = "PENDING";
           break;
         case 1:
-          result = "DONE"
+          result = "DONE";
           break;
         case 2:
-          result = "COMPLETE"
+          result = "COMPLETE";
           break;
         default:
-            result = "UNKNWON"
+          console.log(status);
+            result = "UNKNWON";
       }
       return result;
     };
