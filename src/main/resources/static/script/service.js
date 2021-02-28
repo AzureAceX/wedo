@@ -45,10 +45,10 @@ app.factory("WedoSerivce", function ($http) {
 
 
 //get one
-    var getTask = function (param, cb) {
+    var getTask = function (taskid, cb) {
     $http({
       method: "GET",
-      url: "https://azureace-wedo.herokuapp.com/tasks/get/ " + param,
+      url: "https://azureace-wedo.herokuapp.com/tasks/get/ " + taskid,
     })
       .success(function (data, status, headers, config) {
         cb(null, data);

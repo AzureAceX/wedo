@@ -99,26 +99,26 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
 
       $scope.updateTaskStatus = function () {
 
-        console.log($scope.selectedRows.length);
+        // console.log($scope.selectedRows.length);
 
-        if($scope.selectedRows.length == 0){
-          toastr.warning("Make A Selection To Proceed");
-          $scope.updateTask = {};
-          return;
-        }
+        // if($scope.selectedRows.length == 0){
+        //   toastr.warning("Make A Selection To Proceed");
+        //   $scope.updateTask = {};
+        //   return;
+        // }
 
-        if($scope.selectedRows.length > 1){
-          toastr.error("Sorry, You Can Only Update Task Details Individually At This Point In Time");
+        // if($scope.selectedRows.length > 1){
+        //   toastr.error("Sorry, You Can Only Update Task Details Individually At This Point In Time");
 
-          //unset everything && empty selection list
-          for(var x = 0 ; x<$scope.selectedRows.length; x++){
-            $scope.selectedRows[x].selected = false;
-          }
-          $scope.selectedRows = [];
-          return;
-        }
+        //   //unset everything && empty selection list
+        //   for(var x = 0 ; x<$scope.selectedRows.length; x++){
+        //     $scope.selectedRows[x].selected = false;
+        //   }
+        //   $scope.selectedRows = [];
+        //   return;
+        // }
 
-          console.log($scope.selectedRows[0]);
+        //   console.log($scope.selectedRows[0]);
 
 
         // $scope.targetTask;
@@ -136,7 +136,7 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
         //   return;
         // }
 
-        WedoSerivce.getTask($scope.selectedRows[0], function (err, data){
+        WedoSerivce.getTask($scope.selectedRow.taskid, function (err, data){
           if (!err) {
             $scope.targetTask = data;
             console.log(data);
@@ -176,21 +176,28 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
      }
 
      $scope.rowSelected = function(row){
-      // if(row.selected){
-      //   $scope.selectedRows.push(row);
-      // }
-      
-      //clear prev
-      if($scope.selectedRows[0].selected){
-        $scope.selectedRows[0].selected = false;
-        $scope.selectedRows = [];
+
+      if($scope.selectedRow.selected){
+        $scope.selectedRow.selected = false;
       }
 
-      //add new
-      $scope.selectedRow = row;
-      $scope.selectedRows.push(row);
+       $scope.selectedRow = row;
 
-      console.log(selectedRows);
+      // // if(row.selected){
+      // //   $scope.selectedRows.push(row);
+      // // }
+      
+      // //clear prev
+      // if($scope.selectedRows[0].selected){
+      //   $scope.selectedRows[0].selected = false;
+      //   $scope.selectedRows = [];
+      // }
+
+      // //add new
+      // $scope.selectedRow = row;
+      // $scope.selectedRows.push(row);
+
+      console.log(selectedRow);
     };
 
 });
