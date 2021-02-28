@@ -190,10 +190,10 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
       }
 
       //if we arent removing a selection
-      if(!popped){
+      if(popped == false){
         $scope.selectedRow = row;
         $scope.selectedRows.push(row);
-        popped = false;
+        // popped = false;
       }
 
       // // if(row.selected){
