@@ -85,8 +85,8 @@ class TaskController {
 
 	}
 
-	@PutMapping(value = "/update-status")
-	public ResponseEntity<Task> udpateTaskStatus(@RequestBody Task taskDto) throws Exception {
+	@PutMapping(value = "/update-status/{taskid}")
+	public ResponseEntity<Task> udpateTaskStatus(@PathVariable("taskid") Integer taskid, @RequestBody Task taskDto) throws Exception {
 		Task taskObj = new Task();
 
 		if (taskRepositoryObj.findById(taskDto.getTaskid()).isPresent()) {

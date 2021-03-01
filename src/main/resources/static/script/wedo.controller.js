@@ -95,7 +95,7 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
                 // $scope.task = data;
                 console.log(data);
            }
-        })                                
+        })
         $scope.listTasks();
       };
 
@@ -145,12 +145,12 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
             console.log(data);
          }
         })
-        
-        //   WedoSerivce.updateTaskStatus($scope.targetTask, function (err, data){
-        //     if (!err) {
-        //         console.log(data);
-        //    }
-        // })
+
+          WedoSerivce.updateTaskStatus($scope.selectedRow.taskid, $scope.selectedRow function (err, data){
+            if (!err) {
+                console.log(data);
+           }
+        })
 
       };
 
@@ -179,38 +179,28 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
      }
 
      $scope.rowSelected = function(row){
-       var popped = false;
 
-      //If the task exists, pop it by searching existing list, and splicing
-      for(var x = 0; x<$scope.selectedRows.length; x++){
-        if(x<$scope.selectedRows[x].taskid == row.taskid){
-          $scope.selectedRows.splice([x],1);
-          popped = true;
-        }
-      }
+       $scope.selectedRow = row;
+       $scope.selectedRows.push(row);
 
-      //if we arent removing a selection
-      if(popped == false){
-        $scope.selectedRow = row;
-        $scope.selectedRows.push(row);
-        // popped = false;
-      }
-
-      // // if(row.selected){
-      // //   $scope.selectedRows.push(row);
-      // // }
-      
-      // //clear prev
-      // if($scope.selectedRows[0].selected){
-      //   $scope.selectedRows[0].selected = false;
-      //   $scope.selectedRows = [];
+      //  var popped = false;
+      //
+      // //If the task exists, pop it by searching existing list, and splicing
+      // for(var x = 0; x<$scope.selectedRows.length; x++){
+      //   if(x<$scope.selectedRows[x].taskid == row.taskid){
+      //     $scope.selectedRows.splice([x],1);
+      //     popped = true;
+      //   }
       // }
-
-      // //add new
-      // $scope.selectedRow = row;
-      // $scope.selectedRows.push(row);
-
-      console.log($scope.selectedRows);
+      //
+      // //if we arent removing a selection
+      // if(popped == false){
+      //   $scope.selectedRow = row;
+      //   $scope.selectedRows.push(row);
+      //   // popped = false;
+      // }
+      //
+      // console.log($scope.selectedRows);
     };
 
 });
