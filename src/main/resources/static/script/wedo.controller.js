@@ -50,7 +50,10 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
       }
     };
 
-      $scope.updateTaskDetails = function(task) {
+      $scope.updateTaskDetails = function() {
+
+        // https://plnkr.co/edit/tEzmex?p=preview&preview
+        
         console.log(task);
         // $scope.taskToUpdate = [];
         // console.log($scope.checkedItem);
@@ -103,7 +106,8 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
 
       $scope.updateTaskStatus = function (task) {
 
-        console.log(task);
+        // console.log(task);
+        $scope.selectedRow = task;
 
         // console.log($scope.selectedRows.length);
 
@@ -125,7 +129,6 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
         // }
 
         //   console.log($scope.selectedRows[0]);
-
 
         // $scope.targetTask;
         // $scope.checked = [];
@@ -149,11 +152,11 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
         //  }
         // })
 
-        //   WedoSerivce.updateTaskStatus(task.taskid, task, function (err, data){
-        //     if (!err) {
-        //         console.log(data);
-        //    }
-        // })
+          WedoSerivce.updateTaskStatus(task.taskid, task, function (err, data){
+            if (!err) {
+                console.log(data);
+           }
+        })
 
       };
 

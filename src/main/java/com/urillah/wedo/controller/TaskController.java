@@ -90,17 +90,19 @@ class TaskController {
 		Task taskObj = new Task();
 
 		if (taskRepositoryObj.findById(taskDto.getTaskid()).isPresent()) {
-
 			//STATUS is incremental, can only go upwards.
 			switch(taskDto.getStatus()) {
 			case 0:
+			//IF PENDING
 				taskObj.setStatus(Status.DONE.ordinal());
 				break;
 			case 1:
+			//IF DONE
 				if(!taskServiceObj.hasChild(taskDto.getTaskid())) {
+					//IF GIVEN TASK HAS NO CHILD
 					taskObj.setStatus(Status.COMPLETE.ordinal());
 				}
-
+				//IF IT HAS A CHILD
 				List<Task> childrenTasks =  taskServiceObj.getChilds(taskDto.getTaskid());
 				if(taskServiceObj.validateFamilyUpdate(childrenTasks)) {
 					taskObj.setStatus(Status.COMPLETE.ordinal());
@@ -112,11 +114,14 @@ class TaskController {
 			}
 			taskRepositoryObj.save(taskObj);
 			return new ResponseEntity<>(taskObj, HttpStatus.OK);
+		}else{
+			System.out.println("TASK NOT FOUND!");
 		}
 
 		return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
 	}
 
+//LATER
 	@PutMapping(value = "/update-bulk")
 	public ResponseEntity<Task> bulkUpdate(List<Task> taskList) {
 		Task taskObj;
