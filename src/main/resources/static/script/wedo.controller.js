@@ -22,14 +22,16 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
 
     //List tasks - the reload version
     $scope.listTasks = function () {
-      toastr.info("Loading Tasks");
+      toastr.info("Updating Task Listing");
       WedoSerivce.listTasks(function (err, data) {
         if (!err) {
           $scope.taskList = data;
+          $scope.taskCount = data.length;
+
           $scope.selectedRow = data[0];
           $scope.selectedRow.selected = true;
           $scope.selectedRows.push($scope.selectedRow);
-          $scope.taskCount = data.length;
+
         }
       });
     };
