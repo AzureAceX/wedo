@@ -98,22 +98,22 @@ class TaskController {
 		if (taskRepositoryObj.findById(taskDto.getTaskid()).isPresent()) {
 			//STATUS is incremental, can only go upwards.
 			switch(taskDto.getStatus()) {
-			case 0:
-			//IF PENDING
+			case 0://IF STATUS PENDING
 				taskObj.setStatus(Status.DONE.ordinal());
 				break;
-			case 1:
-			//IF DONE
+			case 1: //IF STATUS DONE
+			//IF GIVEN TASK HAS NO CHILD
 				if(!taskServiceObj.hasChild(taskDto.getTaskid())) {
-					//IF GIVEN TASK HAS NO CHILD
 					taskObj.setStatus(Status.COMPLETE.ordinal());
+				}else{
+					//IF IT HAS A CHILD
+					List<Task> childrenTasks =  taskServiceObj.getChilds(taskDto.getTaskid());
+					if(taskServiceObj.validateFamilyUpdate(childrenTasks)) {
+						taskObj.setStatus(Status.COMPLETE.ordinal());
+					}
+					System.out.println("STATUS SHALL REMAIN DONE UNTIL CHILDREN TASKS ARE COMPLETED");
 				}
-				//IF IT HAS A CHILD
-				List<Task> childrenTasks =  taskServiceObj.getChilds(taskDto.getTaskid());
-				if(taskServiceObj.validateFamilyUpdate(childrenTasks)) {
-					taskObj.setStatus(Status.COMPLETE.ordinal());
-				}
-				System.out.println("STATUS SHALL REMAIN DONE UNTIL CHILDREN TASKS ARE COMPLETED");
+
 				break;
 			default:
 				throw new Exception("INVALID STATUS STATE");
