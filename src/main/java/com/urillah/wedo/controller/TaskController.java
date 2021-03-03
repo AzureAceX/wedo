@@ -89,6 +89,12 @@ class TaskController {
 	public ResponseEntity<Task> udpateTaskStatus(@PathVariable("taskid") Integer taskid, @RequestBody Task taskDto) throws Exception {
 		Task taskObj = new Task();
 
+		try {
+			taskObj = modelMapper.map(taskDto, Task.class);
+		} catch (Exception e) {
+			throw new Exception("MAPPING FAILED {}" + taskDto);
+		}
+
 		if (taskRepositoryObj.findById(taskDto.getTaskid()).isPresent()) {
 			//STATUS is incremental, can only go upwards.
 			switch(taskDto.getStatus()) {

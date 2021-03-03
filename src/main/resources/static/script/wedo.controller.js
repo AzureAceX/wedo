@@ -53,7 +53,7 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
       $scope.updateTaskDetails = function() {
 
         // https://plnkr.co/edit/tEzmex?p=preview&preview
-        
+
         console.log(task);
         // $scope.taskToUpdate = [];
         // console.log($scope.checkedItem);
