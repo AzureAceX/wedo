@@ -15,17 +15,16 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
     //preference on loading on app run
     WedoSerivce.listTasks(function (err, data) {
       if (!err) {
-        toastr.info("Loading Tasks");
         $scope.taskList = data;
         $scope.taskCount = data.length;
       }
     });
 
-    //List tasks -
+    //List tasks - the reload version
     $scope.listTasks = function () {
+      toastr.info("Loading Tasks");
       WedoSerivce.listTasks(function (err, data) {
         if (!err) {
-          toastr.info("Loading Tasks");
           $scope.taskList = data;
           $scope.selectedRow = data[0];
           $scope.selectedRow.selected = true;
@@ -157,7 +156,7 @@ app.controller("WedoController", function ($scope, WedoSerivce, $location, $wind
                 console.log(data);
            }
         })
-
+        $scope.listTasks();
       };
 
 
