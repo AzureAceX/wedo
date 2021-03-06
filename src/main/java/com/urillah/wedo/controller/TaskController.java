@@ -97,10 +97,12 @@ class TaskController {
 		if (taskRepositoryObj.findById(taskDto.getTaskid()).isPresent()) {
 			//STATUS is incremental, can only go upwards.
 			System.out.println("EG OF OBJ:" + taskDto);
-			switch(taskDto.getStatus()) {
+			System.out.println("EG OF STAUTS 1 :" + Status.DONE.ordinal());
+			switch(Integer.valueOf(taskDto.getStatus())) {
+			
 			case 0://IF STATUS PENDING
 				taskObj.setStatus(Status.DONE.ordinal());
-				System.out.println("EG OF STAUTS:" + Status.DONE.ordinal());
+				System.out.println("EG OF STAUTS 2:" + Status.DONE.ordinal());
 				break;
 			case 1: //IF STATUS DONE
 			//IF GIVEN TASK HAS NO CHILD
