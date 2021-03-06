@@ -96,10 +96,11 @@ class TaskController {
 
 		if (taskRepositoryObj.findById(taskDto.getTaskid()).isPresent()) {
 			//STATUS is incremental, can only go upwards.
-			System.out.println(taskDto);
+			System.out.println("EG OF OBJ:" + taskDto);
 			switch(taskDto.getStatus()) {
 			case 0://IF STATUS PENDING
 				taskObj.setStatus(Status.DONE.ordinal());
+				System.out.println("EG OF STAUTS:" + Status.DONE.ordinal());
 				break;
 			case 1: //IF STATUS DONE
 			//IF GIVEN TASK HAS NO CHILD
@@ -118,7 +119,12 @@ class TaskController {
 			default:
 				throw new Exception("INVALID STATUS STATE");
 			}
-			taskRepositoryObj.save(taskObj);
+			
+			try {
+				taskRepositoryObj.save(taskObj);
+			}catch (Exception ex){
+				System.out.println("Couldnt Save" + ex);
+			}
 			return new ResponseEntity<>(taskObj, HttpStatus.OK);
 		}else{
 			System.out.println("TASK NOT FOUND!");
