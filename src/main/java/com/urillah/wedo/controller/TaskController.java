@@ -96,6 +96,7 @@ class TaskController {
 
 		if (taskRepositoryObj.findById(taskDto.getTaskid()).isPresent()) {
 			//STATUS is incremental, can only go upwards.
+			System.out.println(taskDto);
 			switch(taskDto.getStatus()) {
 			case 0://IF STATUS PENDING
 				taskObj.setStatus(Status.DONE.ordinal());
