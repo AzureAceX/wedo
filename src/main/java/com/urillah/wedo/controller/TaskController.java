@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import com.urillah.wedo.dto.TaskDTO;
 import com.urillah.wedo.model.Task;
@@ -128,22 +127,22 @@ class TaskController {
 	}
 
 //LATER
-	@PutMapping(value = "/update-bulk")
-	public ResponseEntity<Task> bulkUpdate(List<Task> taskList) {
-		Task taskObj;
-
-		for (Task task : taskList) {
-			if (taskRepositoryObj.findById(task.getTaskid()).isPresent()) {
-
-				taskObj = taskRepositoryObj.findById(task.getTaskid()).get();
-				taskObj.setStatus(task.getStatus());
-				taskRepositoryObj.save(taskObj);
-				return new ResponseEntity<>(taskObj, HttpStatus.OK);
-			}
-		}
-
-		return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
-	}
+//	@PutMapping(value = "/update-bulk")
+//	public ResponseEntity<Task> bulkUpdate(List<Task> taskList) {
+//		Task taskObj;
+//
+//		for (Task task : taskList) {
+//			if (taskRepositoryObj.findById(task.getTaskid()).isPresent()) {
+//
+//				taskObj = taskRepositoryObj.findById(task.getTaskid()).get();
+//				taskObj.setStatus(task.getStatus());
+//				taskRepositoryObj.save(taskObj);
+//				return new ResponseEntity<>(taskObj, HttpStatus.OK);
+//			}
+//		}
+//
+//		return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+//	}
 
 	@DeleteMapping(value = "/clear")
 	public ResponseEntity<HttpStatus> clearTasks() {
