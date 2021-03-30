@@ -2,13 +2,14 @@ var app = angular.module("myApp", ['ngRoute']);
 
 app.config(function ($routeProvider, $locationProvider) {
     
-  if(window.history && window.history.pushState){
-    $locationProvider.html5Mode(true);
-  }
+  // if(window.history && window.history.pushState){
+  //   $locationProvider.html5Mode(true);
+  // }
   
   $routeProvider
     .when("/", {
-      templateUrl: "login.html",
+      // templateUrl: "login.html",
+      template : "<h1>Banana</h1><p>Bananas contain around 75% water.</p>"
     })
     .when("/loggedIn", {
         templateUrl: "loggedIn.html",

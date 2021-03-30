@@ -16,8 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.urillah.wedo.dto.TaskDTO;
 import com.urillah.wedo.model.Task;
 import com.urillah.wedo.repository.TaskRepository;
+import com.urillah.wedo.service.TaskService;
+
+import util.Status;
 
 @RestController
 @RequestMapping("/tasks")
@@ -27,65 +31,154 @@ class TaskController {
 	private TaskRepository taskRepositoryObj;
 
 	@Autowired
-	private ModelMapper modelMapper;
+	private TaskService taskServiceObj;
 
-//    @Autowired
-//    AccountDetailsRepository accountDetailsRepositoryObj;
+	@Autowired
+	private ModelMapper modelMapper;
 
 	@GetMapping(value = "/list")
 	public List<Task> getAll() {
 		List<Task> tasks = new ArrayList<>();
 		taskRepositoryObj.findAll().forEach(tasks::add);
-		System.out.println("we here");
+		System.out.println(tasks.size());
 		return tasks;
 	}
 
-//	@GetMapping(value = "/{accountId}")
-//	public Account getById(@PathVariable("accountId") Long accountId) {
-//		return accountRepositoryObj.findOne(accountId);
+//	@GetMapping(value = "/{}")
+//	public Task getById(@PathVariable("taskid") Long taskId) {
+//		return taskRepositoryObj.findById(taskId);
 //	}
 
-	@PostMapping(value = "/create")
-	public ResponseEntity<Task> create(@RequestBody Task taskDto) {
-		System.out.println("and now here");
-		try {
-			Task taskObj = modelMapper.map(taskDto, Task.class);
+	@PutMapping(value = "/update-details/{taskid}")
+	public Task updateDetails(@PathVariable("taskid") Integer taskid, @RequestBody TaskDTO taskDTO) {
+		Task taskObj = new Task();
+
+		System.out.println("Updating" + taskObj);
+
+		if(taskRepositoryObj.findById(taskid).isPresent()) {
+			taskObj = taskRepositoryObj.findById(taskid).get();
+			taskObj.setName(taskDTO.getName());
+			taskObj.setDescription(taskDTO.getDescription());
 			taskRepositoryObj.save(taskObj);
-			return new ResponseEntity<>(taskObj, HttpStatus.CREATED);
-		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+			return taskObj;
+		}else {
+			System.out.println("Task Not Found!");
 		}
+		return taskObj;
 	}
 
-    @PutMapping(value = "/update-status")
-    public ResponseEntity<Task> udpateTaskStatus(@RequestBody Task taskDto) {
-    	Task taskObj = new Task();
-    	
-		if(taskRepositoryObj.findById(taskDto.getTaskid()).isPresent()) {
-			taskObj.setStatus(taskDto.getStatus());
+	@PostMapping(value = "/create")
+	public Task create(@RequestBody Task taskDto) {
+		Task taskObj = new Task();
+		try {
+			taskObj = modelMapper.map(taskDto, Task.class);
+			taskObj.setStatus(Status.PENDING.ordinal()); //All start from pending
+			taskObj.setPriority(1); //All start from pending
 			taskRepositoryObj.save(taskObj);
+			System.out.println("saving {}" + taskObj);
+			return taskObj;
+		} catch (Exception e) {
+			System.out.println("Creation failed {}" + taskDto);
+			return taskObj;
+		}
+
+	}
+
+	@PutMapping(value = "/update-status/{taskid}")
+	public ResponseEntity<Task> udpateTaskStatus(@PathVariable("taskid") Integer taskid, @RequestBody Task taskDto) throws Exception {
+		Task taskObj = new Task();
+
+		try {
+			taskObj = modelMapper.map(taskDto, Task.class);
+		} catch (Exception e) {
+			throw new Exception("MAPPING FAILED {}" + taskDto);
+		}
+
+		if (taskRepositoryObj.findById(taskDto.getTaskid()).isPresent()) {
+			//STATUS is incremental, can only go upwards.
+			System.out.println("EG OF OBJ:" + taskDto);
+			System.out.println("EG OF STAUTS 1 :" + Status.DONE.ordinal());
+			switch(Integer.valueOf(taskDto.getStatus())) {
+			
+			case 0://IF STATUS PENDING
+				taskObj.setStatus(Status.DONE.ordinal());
+				System.out.println("EG OF STAUTS 2:" + Status.DONE.ordinal());
+				break;
+			case 1: //IF STATUS DONE
+			//IF GIVEN TASK HAS NO CHILD
+				if(!taskServiceObj.hasChild(taskDto.getTaskid())) {
+					taskObj.setStatus(Status.COMPLETE.ordinal());
+				}else{
+					//IF IT HAS A CHILD
+					List<Task> childrenTasks =  taskServiceObj.getChilds(taskDto.getTaskid());
+					if(taskServiceObj.validateFamilyUpdate(childrenTasks)) {
+						taskObj.setStatus(Status.COMPLETE.ordinal());
+					}
+					System.out.println("STATUS SHALL REMAIN DONE UNTIL CHILDREN TASKS ARE COMPLETED");
+				}
+
+				break;
+			default:
+				throw new Exception("INVALID STATUS STATE");
+			}
+			
+			try {
+				taskRepositoryObj.save(taskObj);
+			}catch (Exception ex){
+				System.out.println("Couldnt Save" + ex);
+			}
 			return new ResponseEntity<>(taskObj, HttpStatus.OK);
+		}else{
+			System.out.println("TASK NOT FOUND!");
 		}
 
 		return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
-    }
-    
-//	@DeleteMapping(value = "/{accountId}")
-//	public ResponseEntity<HttpStatus> delete(@PathVariable("accountId") Long accountId) {
+	}
+
+//LATER
+//	@PutMapping(value = "/update-bulk")
+//	public ResponseEntity<Task> bulkUpdate(List<Task> taskList) {
+//		Task taskObj;
+//
+//		for (Task task : taskList) {
+//			if (taskRepositoryObj.findById(task.getTaskid()).isPresent()) {
+//
+//				taskObj = taskRepositoryObj.findById(task.getTaskid()).get();
+//				taskObj.setStatus(task.getStatus());
+//				taskRepositoryObj.save(taskObj);
+//				return new ResponseEntity<>(taskObj, HttpStatus.OK);
+//			}
+//		}
+//
+//		return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+//	}
+
+	@DeleteMapping(value = "/clear")
+	public ResponseEntity<HttpStatus> clearTasks() {
+		try {
+			List<Task> tasks = new ArrayList<>();
+			taskRepositoryObj.findAll().forEach(tasks::add);
+			taskRepositoryObj.deleteAll(tasks);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+		}
+	}
+
+//	@DeleteMapping(value = "/{taskid}")
+//	public ResponseEntity<HttpStatus> delete(@PathVariable("taskid") Long taskId) {
 //		try {
-//			accountRepositoryObj.delete(accountId);
+//			taskRepositoryObj.delete(taskId);
 //			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 //		} catch (Exception e) {
 //			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
 //		}
 //	}
 
-	/*
-	 * Account Login
-	 */
 
-//	@GetMapping(value = "/{username}")
-//	public Task findByUsername(@PathVariable("username") String username) {
-//		return accountRepositoryObj.findByUsername(username);
+//	@GetMapping(value = "/{taskname}")
+//	public Task findByTaskName(@PathVariable("name") String taskName) {
+//		return taskRepositoryObj.findByName(taskName);
 //	}
+
 }

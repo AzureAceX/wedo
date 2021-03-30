@@ -1,17 +1,16 @@
-
+<!--
 <!DOCTYPE html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>We Do | Task Management</title>
-        
-    
+
+
     <script src="vendor/angularJS/angularJS.min.js"></script>
     <script src="vendor/angular-route/angular-route.min.js"></script>
     <script src="vendor/jQuery/jquery-3.3.1.min.js"></script>
     <script src="vendor/popperjs/popperv1.112.5.min.js"></script>
-    <!-- <script src="https://unpkg.com/@popperjs/core@2"></script> -->
-    
+
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -19,12 +18,11 @@
     <script src="script/app.js"></script>
     <script src="script/service.js"></script>
     <script src="script/wedo.controller.js"></script>
-    
+
     </head>
 
     <body>
     <div ng-app="myApp" ng-controller="WedoController" >
-        <!-- ng-init="listTasks()" -->
                 <div class="container">
                     <div id="row1" class="row">
                         <div class="col-6 col-lg-6 col-md-6 col-sm-6">
@@ -38,21 +36,73 @@
                 </div>
 
             <div class="d-flex p-2 justify-content-center mb-5">
-                <!-- <a type="button" class="btn btn-info mr-2" href="/employees">View Employees</a> -->
                 <a type="button" class="btn btn-info mr-2" href="/tasks">Tasks</a>
-                <!-- <a type="button" class="btn btn-info mr-2" href="/registry">View Registry</a>
-                <a type="button" class="btn btn-info mr-2" href="/loggedIn">logged in</a> -->
-            </div> 
+                <a type="button" class="btn btn-info mr-2" href="/alt">Alternate</a>
+            </div>
 
             <div class="container mt-5">
                 <div ng-view></div>
               </div>
-    
-    
-    
+
+
+
             </div>
 
-       
+
     </body>
     </html>
-    
+
+
+
+ -->
+
+
+    <!-- ng-init="listTasks()" -->
+
+<html lang="en" ng-app="myApp">
+<head>
+
+      <script src="vendor/angularJS/angularJS1-2-16.min.js"></script>
+      <script src="vendor/angular-route/angular-route.min.js"></script>
+      <script src="vendor/jQuery/jquery-3.3.1.min.js"></script>
+      <script src="vendor/popperjs/popperv1.112.5.min.js"></script>
+
+      <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+      <script src="vendor/toastr/toastr.js"></script>
+
+      <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" href="vendor/toastr/toastr.css">
+
+      <!-- <script src="vendor/tabulator/js/tabulator.min.js"></script> -->
+      <!-- <link rel="stylesheet" href="vendor/tabulator/css/bootstrap/tabulator_bootstrap.min.css"> -->
+
+      <link rel="stylesheet" type="text/css" href="css/style.css">
+
+      <script src="script/app.js"></script>
+      <script src="script/service.js"></script>
+      <script src="script/wedo.controller.js"></script>
+
+      <script src="vendor/tabulator/js/tabulator.min.js"></script>
+      <link rel="stylesheet" href="vendor/tabulator/css/bootstrap/tabulator_bootstrap.min.css">
+      <!-- <link href="https://unpkg.com/tabulator-tables@4.3.0/dist/css/tabulator.min.css" rel="stylesheet"> -->
+      <!-- <script type="text/javascript" src="https://unpkg.com/tabulatortables@4.3.0/dist/js/tabulator.min.js"></script> -->
+
+</head>
+<body ng-controller="WedoController">
+
+  <div class="container">
+      <div class="row justify-content text-align-center">
+          <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+              <div class="jumbotron jumbotron-fluid">
+                  <h1 class="mainHeader">We Do</h1>
+                  <h3 class="secondaryheader">Team Driven Task Management System</h3>
+              </div>
+          </div>
+      </div>
+      <hr width="100%">
+  </div>
+
+  <div ng-view></div>
+
+</body>
+</html>
