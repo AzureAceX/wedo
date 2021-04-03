@@ -1,0 +1,228 @@
+<div class="container">
+	<div class="col-8 col-sm-8 col-md-8 d-flex p-2 justify-content-center mb-5">
+        <a type="button" class="btn btn-info mr-2" href="/tasks">View Tasks</a>
+				<a type="button" class="btn btn-info mr-2" href="/alt" aria-disabled="true">Alternate</a>
+
+	</div>
+
+  <button type="button" class="btn btn-info btn-lg pull-right float-right" data-toggle="modal" data-target="#myModal">
+    New Task
+  </button>
+  <h2>All Tasks</h2>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Task ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <!-- <th>Parent Task</th> -->
+        <th>Status</th>
+        <th>Total: {{taskCount}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="task in taskList">
+				<td><input type="checkbox" name="checkedItem" ng-model="checkedItem[task.taskid]"></td>
+        <td>{{task.taskid}}</td>
+        <td>{{task.name}}</td>
+        <td>{{task.description}}</td>
+				<td>{{task.status}}</td>
+        <!-- <td>{{task.status | statusFormatter}}</td> -->
+        <td style="text-align: center;">
+					<div class="row">
+						<button type="button" class="btn btn-success pull-right float-right btn-sm rounded-1" data-toggle="modal" data-target="#updateModal">Update Details</button>
+						<button class="btn btn-secondary " ng-click="updateTaskStatus()">Update Status</button>
+					</div>
+				</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- Trigger the modal with a button -->
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Create A New Task</h4>
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label"
+              >Task Name</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Task Name"
+                ng-model="newTask.name"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label"
+              >Description</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="textarea"
+                class="form-control"
+                placeholder="Description"
+                ng-model="newTask.description"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label"
+              >Parent Task ID (Optional)</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="Parent Task" ng-model="newTask.parenttask"/>
+            </div>
+          </div>
+<!--
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label"
+              >Priority Level</label>
+            <div class="col-sm-10"> -->
+              <!-- <input
+                type="text"
+                class="form-control"
+                id="inputEmail3"
+                placeholder="Priority"
+                ng-model="newTask.priority"
+              /> -->
+							<!-- <option ng-selected="data.unit == item.id" ng-repeat="item in units" ng-value="item.id">{{item.label}}</option> -->
+							<!-- <select class="" name="" ng-model="newTask.priority">
+								<option>Low</option>
+								<option>Normal</option>
+								<option>High</option>
+							</select>
+            </div>
+          </div> -->
+
+          <!-- <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label"
+              >Attachments (Optional)</label
+            >
+            <div class="col-sm-10">
+              <input disabled
+                type="textarea"
+                class="form-control"
+                id="inputEmail3"
+                placeholder="Email Address"
+                ng-model="newwTask.attachment"
+              />
+            </div>
+          </div> -->
+
+          <!-- <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label"
+              >Team ID (optional)</label>
+            <div class="col-sm-2">
+              <input
+                type="text"
+                class="form-control"
+                id="inputEmail3"
+                placeholder="Team ID"
+                ng-model="newTask.teamid"
+              />
+            </div>
+          </div> -->
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="createTask();">
+								Save
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeCreateModal()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="updateModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Update Task Details</h4>
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Task Name</label>
+            <div class="col-sm-10">
+              <input type="text"class="form-control" id="name" placeholder="Task Name" ng-model="updateTask.name"/>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Description</label>
+            <div class="col-sm-10">
+              <input type="textarea" class="form-control" id="description" placeholder="Description" ng-model="updateTask.description"/>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="updateTaskDetails();">
+								Update
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeUpdateModal()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="example-table"></div>
+
+<script>
+				var tableData = [
+				{id:1, name:"A A", age:"24",
+gender:"male", height:1, col:"red"},
+				{id:2, name:"B B", age:"48",
+gender:"female", height:2, col:"blue"},]
+
+var table = new Tabulator("#example-table", {
+  data:tableData,
+  columns:
+  [ {title:"Name", field:"name"},
+    {title:"Age", field:"age"},
+    {title:"Gender", field:"gender"}, 
+    {title:"Height",field:"height"}, 
+    {title:"Favourite Color",field:"col"},
+  ],
+  });
+
+
+</script>

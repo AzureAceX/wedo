@@ -12,5 +12,5 @@ import lombok.Data;
     private Integer priority;
     private String attachment;
     private Integer status;
-    
+
 }
